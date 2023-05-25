@@ -1,0 +1,29 @@
+.dashboard {
+    &__title {
+        text-align: center;
+    }
+
+    &__planner {
+        swiper-container.months {
+            width: 50%;
+            height: 50vh;
+
+            swipper-slide {
+                text-align: center;
+                h2{
+                    text-align: center;
+                }
+
+            }
+
+        }
+
+        swiper-container.all-days {
+            height: 30vh;
+            fm-stream-item.days {
+                display: flex;
+                justify-content: space-evenly;
+            }
+        }
+    }
+}

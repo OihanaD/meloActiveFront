@@ -1,0 +1,25 @@
+<div class="content dashboard">
+  <h1 class="dashboard__title">Mélo-Active</h1>
+  <div class="dashboard__planner">
+    <swiper-container  fmSwiper [config]="config" init="false" class="w-full months">
+      <ng-container *ngFor="let month of months">
+        <swiper-slide class="w-[310px] sm:w-[450px] pb-6">
+          <fm-stream-item>
+            <h2>{{ month }}</h2>
+            <swiper-container fmSwiper [config]="config" init="false" class="w-full all-days">
+              <ng-container *ngFor="let week of weeks">
+                <swiper-slide class="w-[310px] sm:w-[450px] pb-6">
+                  <fm-stream-item class="days">
+
+                    <div class="day" *ngFor="let day of week">{{ day }}</div>
+
+                  </fm-stream-item>
+                </swiper-slide>
+              </ng-container>
+            </swiper-container>
+          </fm-stream-item>
+        </swiper-slide>
+      </ng-container>
+    </swiper-container>
+  </div>
+</div>
