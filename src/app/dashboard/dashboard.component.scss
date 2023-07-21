@@ -1,28 +1,58 @@
+$background-button : rgba(255, 78, 0, 0.34);
 .dashboard {
     &__title {
         text-align: center;
     }
 
     &__planner {
-        swiper-container.months {
-            width: 50%;
-            height: 50vh;
+        border: 1px solid black;
+        padding: 30px;
+        margin: 30px;
+        border-radius: 10px;
 
-            swipper-slide {
-                text-align: center;
-                h2{
-                    text-align: center;
-                }
-
+        &__months {
+            text-align: center;
+            button {
+                background-color: $background-button;
+                border-radius: 50%;
+                width: 20px;
+                height: 20px;
             }
 
-        }
-
-        swiper-container.all-days {
-            height: 30vh;
-            fm-stream-item.days {
+            &__month {
                 display: flex;
-                justify-content: space-evenly;
+                flex-wrap: wrap;
+                align-items: center;
+                margin-top: 20px;
+
+                button {
+                    background-color: $background-button;
+                    border-radius: 50%;
+                    width: 48px;
+                    height: 48px;
+                }
+
+                &__days {
+                    width: 13.28%;
+                    text-align: center;
+                    span{
+                        background-color: rgba(255, 156, 116, 0.96);                        ;
+                        padding: 9px;
+                        border-radius: 14%;
+                        color:white;
+                    }
+
+                    &__day {
+                        margin-bottom: 10px;
+                        border: 1px solid;
+                        height: 58vh;
+                        padding-top: 10px;
+
+                    }
+
+                }
+
+
             }
         }
     }

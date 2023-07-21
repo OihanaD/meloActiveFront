@@ -1,25 +1,32 @@
 <div class="content dashboard">
   <h1 class="dashboard__title">Mélo-Active</h1>
   <div class="dashboard__planner">
-    <swiper-container  fmSwiper [config]="config" init="false" class="w-full months">
-      <ng-container *ngFor="let month of months">
-        <swiper-slide class="w-[310px] sm:w-[450px] pb-6">
-          <fm-stream-item>
-            <h2>{{ month }}</h2>
-            <swiper-container fmSwiper [config]="config" init="false" class="w-full all-days">
-              <ng-container *ngFor="let week of weeks">
-                <swiper-slide class="w-[310px] sm:w-[450px] pb-6">
-                  <fm-stream-item class="days">
+    <div class="dashboard__planner__months">
+      <button (click)="goToPreviousMonth()">
+        < </button>
+          {{currentMonth }} {{currentYear}}
+          <button (click)="goToNextMonth()">></button>
+    </div>
+    <div class="dashboard__planner__months__month">
+      <button (click)="goToPreviousWeek()">
+        < </button>
+          <div class="dashboard__planner__months__month__days" *ngFor="let day of daysOfMonth; let i = index">
+            <span>{{ getDayOfWeek(i) }}</span>
+            <div class="dashboard__planner__months__month__days__day">
+              {{ day }}
+              <div *ngFor="let infos of informations">
+                <div *ngIf="day == infos.day">
+                  {{infos.email}}
+                </div>  
+              </div>
 
-                    <div class="day" *ngFor="let day of week">{{ day }}</div>
+            </div>
+          </div>
+          <button (click)="goToNextWeek()">></button>
 
-                  </fm-stream-item>
-                </swiper-slide>
-              </ng-container>
-            </swiper-container>
-          </fm-stream-item>
-        </swiper-slide>
-      </ng-container>
-    </swiper-container>
+    </div>
+    
   </div>
+
+
 </div>
