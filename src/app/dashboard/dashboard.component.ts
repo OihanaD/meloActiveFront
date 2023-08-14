@@ -3,7 +3,7 @@ import { ApiConnexionService } from '../api-connexion.service';
 import { CommonModule, WeekDay } from '@angular/common';
 import { SwiperDirectiveDirective } from '../swiper-directive.directive';
 import { A11y, Mousewheel, Navigation, Pagination, SwiperOptions } from 'swiper';
-import { catchError, of } from 'rxjs';
+import { catchError, empty, of } from 'rxjs';
 import { DatePipe } from '@angular/common';
 
 
@@ -22,11 +22,11 @@ import { DatePipe } from '@angular/common';
 export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
-    // this.getAllCoachSession();
+    // this.getSessionsPerDateCoachSession();
     this.getDaysOfMonth();
     // this.getClientsCoachingSession(); 
-    this.getAll();
-    // console.log(this.informations);
+    this.getSessionsPerDate();
+    this.getPayments();
 
   }
   constructor(private service: ApiConnexionService) { }
@@ -44,29 +44,38 @@ export class DashboardComponent implements OnInit {
   goodMonth: any;
   dateOfMonth: any = [];
   informations: any = [];
+  payments:any = [];
+  clientPayment:any = [];
 
-
-
-
-
-
-  // }
-  getAll() {
-    this.service.getAll(this.currentYear, "0"+this.currentMonthNumber, this.daysOfMonth[0])
+  getSessionsPerDate() {
+    this.service.getSessionsPerDate(this.currentYear, "0"+this.currentMonthNumber, this.daysOfMonth[0])
       .pipe(
         catchError((error) => {
           console.log(error);
           return of([]);
         })
       )
-      .subscribe((all: any) => {
-        console.log(all);
-        
+      .subscribe((all: any) => {        
         this.informations = all;
       });
     
   };
 
+  getPayments(){
+    
+    this.service.getPayments()
+    .pipe(
+      catchError((error)=>{
+        console.log(error);
+        return of([]);
+      })
+    )
+    .subscribe((payment:any)=>{
+    this.payments = payment;
+    })
+    
+  }
+  
   //**********************************************Planner***************************************************************//
 
   getDaysOfMonth() {
@@ -93,7 +102,6 @@ export class DashboardComponent implements OnInit {
       startOfWeek.setDate(startOfWeek.getDate() + 1);
     }
     this.currentMonthNumber = currentMonth+1
-    console.log(weekDays);
     
     
     //j'attribut le weekdays à la variable daysOfMonth
@@ -120,7 +128,7 @@ export class DashboardComponent implements OnInit {
     
     //J'appelle la fonction
     this.getDaysOfMonth();
-    this.getAll();
+    this.getSessionsPerDate();
   }
 
   goToNextWeek() {
@@ -132,7 +140,7 @@ export class DashboardComponent implements OnInit {
     }
     this.currentYear = this.currentDate.getFullYear();
     this.getDaysOfMonth();
-    this.getAll();
+    this.getSessionsPerDate();
   }
   goToPreviousMonth() {
     this.currentDate.setMonth(this.currentDate.getMonth() - 1);
@@ -140,7 +148,7 @@ export class DashboardComponent implements OnInit {
     this.currentYear = this.currentDate.getFullYear();
 
     this.getDaysOfMonth();
-    this.getAll();
+    this.getSessionsPerDate();
     
 
   }
@@ -151,7 +159,7 @@ export class DashboardComponent implements OnInit {
     this.currentYear = this.currentDate.getFullYear();
 
     this.getDaysOfMonth();
-    this.getAll();
+    this.getSessionsPerDate();
     
   }
   getDayOfWeek(index: number): string {

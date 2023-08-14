@@ -2,29 +2,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;600;700&family=Arimo:wght@400;500&display=swap');
 //****************Général****************//
 
-h1,h2,h3,h4{
+h1,
+h2,
+h3,
+h4 {
     font-family: 'Alegreya', serif;
     font-weight: 600;
 }
-h1{
+
+h1 {
     font-size: 4em;
 }
-h2{
-    font-size: 3em;
+
+h2 {
+    font-size: 2em;
 }
-h3{
+
+h3 {
     font-size: 1.2em;
 }
-p,span,div{
+
+p,
+span,
+div {
     font-family: 'Arimo', sans-serif;
 }
+
 $background-button : rgba(255, 78, 0, 0.34);
 
 body {
     margin: 0;
 
     .dashboard {
-        background-image: url(../../assets/Ellipse.png),url(../../assets/Ellipse2.png);
+        background-image: url(../../assets/Ellipse.png), url(../../assets/Ellipse2.png);
         background-repeat: no-repeat;
         background-position: right top, left 70vh;
 
@@ -95,13 +105,20 @@ body {
 
                             &__all-sessions {
                                 &__session {
-                                    padding: 10px;
-                                    margin: 0px 10px;
+                                    padding: 7px;
+                                    margin: 0px 5px;
 
                                     &__name {
                                         border-radius: 20px 20px 0px 0px;
-                                        // background-color: #FF9C74;
+                                        display: flex;
+
+                                        img {
+                                            width: 19px;
+                                            height: 19px;
+                                            padding: 6px 0px 0px 9px;
+                                            border-radius: 50%;
                                         
+                                        }
 
                                         h3 {
                                             margin: 0px 20px;
@@ -128,5 +145,31 @@ body {
                 }
             }
         }
+
+        &__paiements {
+            padding: 30px;
+            margin: 30px;
+            border-radius: 10px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+            &__content {
+                display: flex;
+
+                button {
+                    background-color: $background-button;
+                    border-radius: 50%;
+                    width: 48px;
+                    height: 48px;
+                    border: none;
+
+                }
+
+                &__liste {
+                    box-shadow: 0px 4px 4px 0px rgba(255, 156, 116, 0.96);
+
+                }
+            }
+        }
     }
+
 }

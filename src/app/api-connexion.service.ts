@@ -15,6 +15,7 @@ export class ApiConnexionService {
   private urlClientCoachSession = "/api/clients_coaching_sessions";
   private urlCoachSession = "/api/coaching_sessions";
   private urlInformations = "/api/informations";
+  private urlpayments = "/api/payments";
 
 
   getClients(): Observable<any[]|unknown> {
@@ -47,8 +48,13 @@ export class ApiConnexionService {
       'Accept': 'application/json',
     })})
   }
-  getAll(year:any, month:any, firstday:any){
+  getSessionsPerDate(year:any, month:any, firstday:any){
     return this.http.get<any[]|unknown>(this.url + this.urlInformations+ "/"+ year+ "/" + month+ "/" + firstday, {headers: new HttpHeaders({
+      'Accept': 'application/json',
+    })})
+  }
+  getPayments(){
+    return this.http.get<any[]|unknown>(this.url + this.urlpayments, {headers: new HttpHeaders({
       'Accept': 'application/json',
     })})
   }
