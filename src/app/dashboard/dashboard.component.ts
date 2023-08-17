@@ -27,6 +27,8 @@ export class DashboardComponent implements OnInit {
     // this.getClientsCoachingSession(); 
     this.getSessionsPerDate();
     this.getPayments();
+    this.getPaymentsPerMonth();
+    this.getPaymentsWaiting();
 
   }
   constructor(private service: ApiConnexionService) { }
@@ -46,6 +48,8 @@ export class DashboardComponent implements OnInit {
   informations: any = [];
   payments:any = [];
   clientPayment:any = [];
+  totalPayed:any = [];
+  totalWait?:number;
 
   getSessionsPerDate() {
     this.service.getSessionsPerDate(this.currentYear, "0"+this.currentMonthNumber, this.daysOfMonth[0])
@@ -72,8 +76,67 @@ export class DashboardComponent implements OnInit {
     )
     .subscribe((payment:any)=>{
     this.payments = payment;
+    
     })
     
+  }
+  getPaymentsPerMonth(){
+    
+    this.service.getPaymentsPerMonthPayed(("0"+this.currentMonthNumber), this.currentYear)
+    .pipe(
+      catchError((error)=>{
+        console.log(error);
+        return of([]);
+      })
+    )
+    .subscribe((totalpayed:any)=>{
+      console.log(totalpayed);
+      console.log('mois' + this.currentMonthNumber);
+     this.totalPayed =  totalpayed;
+    
+    })
+    
+  }
+  getPaymentsWaiting(){
+    
+    this.service.getPaymentsWaiting()
+    .pipe(
+      catchError((error)=>{
+        console.log(error);
+        return of([]);
+      })
+    )
+    .subscribe((totalwait:any)=>{
+      totalwait.forEach((total:any) => {
+        this.totalWait = total.total_wait_amount
+      });      
+    
+    })
+    
+  }
+  getMonthLetter(dateString: Date): string {
+    const date = new Date(dateString)
+    const monthLetter = date.toLocaleString('fr-FR', { month: 'long' });
+    return monthLetter;
+  }
+  getMonthNumber(monthString: any): string{
+    const monthNames = [
+      "janvier", "février", "mars", "avril", "mai", "juin",
+      "juillet", "août", "septembre", "octobre", "novembre", "décembre"
+    ];
+  
+    const monthIndex =monthNames.findIndex(month => month === monthString.toLowerCase());
+  
+    if (monthIndex !== -1) {
+      return "0" + (monthIndex +1).toString();
+    } else {
+      return -1 + "0"; // Mois non trouvé
+    }
+  }
+
+  getYear(date: Date):number{
+    const newDate = new Date(date);
+    return newDate.getFullYear();
   }
   
   //**********************************************Planner***************************************************************//
@@ -126,9 +189,12 @@ export class DashboardComponent implements OnInit {
     
     
     
-    //J'appelle la fonction
+    //J'appelle les fonctions
     this.getDaysOfMonth();
     this.getSessionsPerDate();
+    this.getPaymentsPerMonth();
+
+    
   }
 
   goToNextWeek() {
@@ -141,6 +207,8 @@ export class DashboardComponent implements OnInit {
     this.currentYear = this.currentDate.getFullYear();
     this.getDaysOfMonth();
     this.getSessionsPerDate();
+    this.getPaymentsPerMonth();
+
   }
   goToPreviousMonth() {
     this.currentDate.setMonth(this.currentDate.getMonth() - 1);
@@ -149,6 +217,8 @@ export class DashboardComponent implements OnInit {
 
     this.getDaysOfMonth();
     this.getSessionsPerDate();
+    this.getPaymentsPerMonth();
+
     
 
   }
@@ -160,6 +230,8 @@ export class DashboardComponent implements OnInit {
 
     this.getDaysOfMonth();
     this.getSessionsPerDate();
+    this.getPaymentsPerMonth();
+
     
   }
   getDayOfWeek(index: number): string {

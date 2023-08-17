@@ -7,10 +7,14 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import {register} from 'swiper/element/bundle';
 import { SwiperDirectiveDirective } from './swiper-directive.directive';
+import { DetailClientComponent } from './detail-client/detail-client.component';
+import { ListeClientComponent } from './liste-client/liste-client.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    DetailClientComponent,
+    ListeClientComponent,
   ],
   imports: [
     BrowserModule,

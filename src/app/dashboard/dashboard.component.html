@@ -39,19 +39,46 @@
 
   </div>
   <div class="dashboard__paiements">
-    <h2 class="dashboard__paiements__title">Paiments</h2>
+    <h2 class="dashboard__paiements__title">Les paiements</h2>
+    <h3 class="dashboard__paiements__date">{{currentMonth }} {{currentYear}}</h3>
     <div class="dashboard__paiements__content">
-      <button><</button>
+      <button (click)="goToPreviousMonth()"><</button>
       <div  class="dashboard__paiements__content__liste">
-        <div *ngFor="let payment of payments">
-          <p>{{payment.user_name}}</p>
-          <p>{{payment.activity_session}}</p>
-          <p>{{payment.date_session}}</p>
-          <p>{{payment.price}}</p>
+        <div  class="dashboard__paiements__content__liste__seances">
+          <div class="dashboard__paiements__content__liste__seances__title">
+            <h3>Nom</h3>
+            <h3>Activité</h3>
+            <h3>Dernière séance</h3>
+            <h3>Prix</h3>
+            <h3>Payé</h3>
+          </div>
+          <div class="dashboard__paiements__content__liste__seances__details" *ngFor="let payment of payments">
+            <div *ngIf="(getMonthLetter(payment.date_session) + '-' + getYear(payment.date_session)) === (currentMonth + '-' + currentYear)"  class="dashboard__paiements__content__liste__details__seance">
+              <div class="dashboard__paiements__content__liste__seances__details__seance__content">
+                <p>{{payment.user_name}}</p>
+                <p>{{payment.activity_session}}</p>
+                <p>{{payment.date_session | date: 'dd-mm-YYYY'}}</p>
+                <p>{{payment.price}}</p>
+                <p>{{payment.is_paid ? 'V' : 'X'}}</p>
+              </div>
+              <hr>
+            </div>
+
+          </div>
+        </div>
+        <div *ngFor="let seancePayed of totalPayed" class="dashboard__paiements__content__liste__total">
+          <h3>Total/mois</h3>
+          <p class="dashboard__paiements__content__liste__total__win">Reçu</p>
+          <p class="dashboard__paiements__content__liste__total__win__euro">{{ seancePayed.total_paid_amount !== null ? seancePayed.total_paid_amount : 0 }} €</p>
+          <p class="dashboard__paiements__content__liste__total__wait">En attente</p>
+          <p class="dashboard__paiements__content__liste__total__wait__euro">{{ totalWait }} €</p>
+
         </div>
        
+        
       </div>
-      <button>></button>
+      
+      <button  (click)="goToNextMonth()">></button>
     </div>
   </div>
 

@@ -16,6 +16,7 @@ export class ApiConnexionService {
   private urlCoachSession = "/api/coaching_sessions";
   private urlInformations = "/api/informations";
   private urlpayments = "/api/payments";
+  private urlpaymentsTotal = "/api/payments/total";
 
 
   getClients(): Observable<any[]|unknown> {
@@ -55,6 +56,16 @@ export class ApiConnexionService {
   }
   getPayments(){
     return this.http.get<any[]|unknown>(this.url + this.urlpayments, {headers: new HttpHeaders({
+      'Accept': 'application/json',
+    })})
+  }
+  getPaymentsPerMonthPayed(month:any, year:any){
+    return this.http.get<any[]|unknown>(this.url + this.urlpaymentsTotal +"/"+  month + "/"+  year, {headers: new HttpHeaders({
+      'Accept': 'application/json',
+    })})
+  }
+  getPaymentsWaiting(){
+    return this.http.get<any[]|unknown>(this.url + this.urlpaymentsTotal +"/"+ "wait", {headers: new HttpHeaders({
       'Accept': 'application/json',
     })})
   }
