@@ -1,0 +1,134 @@
+//**********************Font****************************//
+// @import url('https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;700&family=Arimo:wght@400;500&display=swap');
+//   @import url('https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;600;700&display=swap');
+//****************Général****************//
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Alegreya', serif;
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 4em;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+p,
+span,
+div {
+    font-family: 'Arimo', sans-serif;
+}
+
+$background-button : rgba(255, 78, 0, 0.34);
+$primary-color : rgba(255, 156, 116, 0.96);
+$secondary-color : rgba(255, 156, 116, 0.96);
+
+.details {
+    background-image: url(../../assets/Ellipse3.png), url(../../assets/Ellipse15.png);
+    background-repeat: no-repeat;
+    background-position: left top, 76vw 33vh;
+    ;
+    height: 100vh;
+
+    &__client {
+        &__title {
+            text-align: center;
+            margin: 0;
+        }
+
+        &__informations {
+            display: flex;
+            gap: 8%;
+            align-items: center;
+
+            img {
+                width: 236px;
+                border-radius: 50%;
+                height: 209px;
+                margin-left: 20px;
+            }
+
+            &__contact {
+                text-align: center;
+                margin-top: 10vh;
+            }
+
+            &__activity {
+                display: flex;
+                gap: 26%;
+
+                p {
+                    padding: 10px;
+                }
+            }
+        }
+
+        &__general {
+            display: flex;
+            width: 80%;
+            gap: 8%;
+            margin-top: 5%;
+
+            &__objectif {
+                margin: 0 95px;
+
+                p {
+                    border-radius: 50px;
+                    background: #FFC3A8;
+                    padding: 20px;
+                }
+            }
+
+            &__problems {
+                margin: 0px 95px 0 10px;
+
+                p {
+                    border-radius: 50px;
+                    background: #FFC3A8;
+                    padding: 20px;
+                }
+            }
+
+            &__payments {
+                position: absolute;
+                top: 50%;
+                right: 0;
+                width: 18%;
+                height: 100%;
+                padding: 20px;
+                overflow-y: auto;
+
+                &__title {
+                    h2 {
+                        color: white;
+                        background-color: #ffa079;
+                        width: 82%;
+                    }
+                }
+
+                &__content {
+                    background-color: #f0f0f085;
+
+                    &__unpaid {
+                        border-radius: 73px;
+                        background: #FFC3A8;
+                        padding: 1%;
+                        text-align: center;
+                    }
+                }
+
+
+            }
+        }
+    }
+}

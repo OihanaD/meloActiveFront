@@ -1,6 +1,14 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
+import { Iclient } from './Interfaces/iclient';
+import { ICoachingSession } from './Interfaces/icoaching-session';
+import { Ipayment } from './Interfaces/ipayment';
+import { IClientsCoachingSession } from './Interfaces/iclients-coaching-session';
+import { IInformations } from './Interfaces/i-informations';
+import { ItotalPayed } from './Interfaces/itotal-payed';
+import { Icoach } from './Interfaces/icoach';
+import { IdataClient } from './Interfaces/idata-client';
 
 
 @Injectable({
@@ -11,6 +19,7 @@ export class ApiConnexionService {
   constructor(private http: HttpClient) { }
   private url = 'http://127.0.0.1:8000';
   private urlClients = "/api/clients";
+  private urlClient = "/api/client/details";
   private urlCoach = "/api/coaches";
   private urlClientCoachSession = "/api/clients_coaching_sessions";
   private urlCoachSession = "/api/coaching_sessions";
@@ -19,14 +28,19 @@ export class ApiConnexionService {
   private urlpaymentsTotal = "/api/payments/total";
 
 
-  getClients(): Observable<any[]|unknown> {
-    return this.http.get<any[]|unknown>(this.url + this.urlClients, {headers: new HttpHeaders({
+  getClients(): Observable<Iclient[]> {
+    return this.http.get<Iclient[]>(this.url + this.urlClients, {headers: new HttpHeaders({
       'Accept': 'application/json',
     })})
   }
-  getCoachSession(): Observable<any[]|unknown> {
+  getClienById(id:string):Observable<IdataClient[]>{
+    return this.http.get<IdataClient[]>(`${this.url}${this.urlClient}/${id}`, {headers: new HttpHeaders({
+      'Accept': 'application/json',
+    })})
+  }
+  getCoachSession(): Observable<ICoachingSession[]> {
     const currentYear = new Date().getFullYear();
-    return this.http.get<any[]>(this.url + this.urlCoachSession, {
+    return this.http.get<ICoachingSession[]>(this.url + this.urlCoachSession, {
       headers: new HttpHeaders({
         'Accept': 'application/json',
       })
@@ -37,35 +51,34 @@ export class ApiConnexionService {
       }))
     );
   }
-  getClientsCoachingSessions(): Observable<any> {
-    // console.log(urlId);
-    
-    return this.http.get<any[]|unknown>(this.url+this.urlClientCoachSession, {headers: new HttpHeaders({
+  getClientsCoachingSessions(): Observable<IClientsCoachingSession[]> {
+    return this.http.get<IClientsCoachingSession[]>(this.url+this.urlClientCoachSession, {headers: new HttpHeaders({
       'Accept': 'application/json',
     })})
   }
-  getCoach(): Observable<any[]|unknown> {
-    return this.http.get<any[]|unknown>(this.url + this.urlCoach, {headers: new HttpHeaders({
+  getCoach(): Observable<Icoach[]> {
+    return this.http.get<Icoach[]>(this.url + this.urlCoach, {headers: new HttpHeaders({
       'Accept': 'application/json',
     })})
   }
-  getSessionsPerDate(year:any, month:any, firstday:any){
-    return this.http.get<any[]|unknown>(this.url + this.urlInformations+ "/"+ year+ "/" + month+ "/" + firstday, {headers: new HttpHeaders({
+  getSessionsPerDate(year:number, month:number, firstday:number):Observable<IInformations[]>{
+    console.log(month)
+    return this.http.get<IInformations[]>(`${this.url}${this.urlInformations}/${year}/${month}/${firstday}`, {headers: new HttpHeaders({
       'Accept': 'application/json',
     })})
   }
-  getPayments(){
-    return this.http.get<any[]|unknown>(this.url + this.urlpayments, {headers: new HttpHeaders({
+  getPayments():Observable<Ipayment[]>{
+    return this.http.get<Ipayment[]>(this.url + this.urlpayments, {headers: new HttpHeaders({
       'Accept': 'application/json',
     })})
   }
-  getPaymentsPerMonthPayed(month:any, year:any){
-    return this.http.get<any[]|unknown>(this.url + this.urlpaymentsTotal +"/"+  month + "/"+  year, {headers: new HttpHeaders({
+  getPaymentsPerMonthPayed(month:string|number, year:number):Observable<ItotalPayed[]>{
+    return this.http.get<ItotalPayed[]>(`${this.url}${this.urlpaymentsTotal}/${month}/${year}`, {headers: new HttpHeaders({
       'Accept': 'application/json',
     })})
   }
-  getPaymentsWaiting(){
-    return this.http.get<any[]|unknown>(this.url + this.urlpaymentsTotal +"/"+ "wait", {headers: new HttpHeaders({
+  getPaymentsWaiting():Observable<number>{ 
+    return this.http.get<number>(`${this.url}${this.urlpaymentsTotal}/wait`, {headers: new HttpHeaders({
       'Accept': 'application/json',
     })})
   }

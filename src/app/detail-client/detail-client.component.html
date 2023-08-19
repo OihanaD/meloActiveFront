@@ -1,1 +1,52 @@
-<p>detail-client works!</p>
+<div class="content details">
+    <div *ngFor="let cl of client" class="details__client">
+        <h1 class="details__client__title">{{cl.user_name}}</h1>
+        <div class="details__client__informations">
+            <img src="{{cl.user_image}}" alt="user photo">
+            <div class="details__client__informations__contact">
+                <p>{{cl.address}}</p>
+                <p>{{cl.phone}}</p>
+                <p>{{cl.email}}</p>
+            </div>
+            <div class="details__client__informations__activity">
+                <div *ngFor="let activity of cl.activity" class="details__client__informations__activity__sticker">
+                    <p [style.backgroundColor]="activity === 'Nutrition' ? '#88FFBF' : (activity === 'Sport' ? '#FF8888' : 'transparent')">
+                        {{ activity }}
+                    </p>
+                </div>
+
+            </div>
+        </div>
+        <div class="details__client__general">
+            <div class="details__client__general__objectif">
+                <div class="details__client__general__objectif__title"><h2>Les Objectifs</h2></div>
+                <p>{{cl.objectives? cl.objectives : "Je suis encore loin de mon objectif, mais j'en suis plus proche qu'hier."}} </p>
+
+            </div>
+            <div class="details__client__general__problems">
+                <h2>Les Problemes</h2>
+                <p>{{cl.problems? cl.problems : "Même si tu avances lentement, tu es toujours plus rapide que celle qui reste sur son canapé. "}} </p>
+
+            </div>
+            
+        </div>
+        <div class="details__client__general__payments">
+            <div class="details__client__general__payments__title">
+                <h2>Les paiements</h2>
+            </div>
+            <div class="details__client__general__payments__content">
+                <div class="details__client__general__payments__content__unpaid">
+                    <h3>Total du</h3>
+                    <p [style.color]="cl.total_unpaid == 0 ? 'rgba(9, 171, 35, 0.96)' : 'rgba(252, 17, 17, 1)' ">{{cl.total_unpaid != 0? -cl.total_unpaid: cl.total_unpaid}}€</p>
+                </div>
+                <div class="details__client__general__payments__content__seance">
+                    <div *ngFor="let session of cl.session_list">
+                        {{session}}                
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

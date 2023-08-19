@@ -3,8 +3,13 @@ import { ApiConnexionService } from '../api-connexion.service';
 import { CommonModule, WeekDay } from '@angular/common';
 import { SwiperDirectiveDirective } from '../swiper-directive.directive';
 import { A11y, Mousewheel, Navigation, Pagination, SwiperOptions } from 'swiper';
-import { catchError, empty, of } from 'rxjs';
+import { Observable, catchError, empty, of } from 'rxjs';
 import { DatePipe } from '@angular/common';
+import { ICoachingSession } from '../Interfaces/icoaching-session';
+import { IInformations } from '../Interfaces/i-informations';
+import { Ipayment } from '../Interfaces/ipayment';
+import { ItotalPayed } from '../Interfaces/itotal-payed';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -22,44 +27,42 @@ import { DatePipe } from '@angular/common';
 export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
-    // this.getSessionsPerDateCoachSession();
     this.getDaysOfMonth();
-    // this.getClientsCoachingSession(); 
     this.getSessionsPerDate();
     this.getPayments();
     this.getPaymentsPerMonth();
     this.getPaymentsWaiting();
 
   }
-  constructor(private service: ApiConnexionService) { }
+  constructor(private service: ApiConnexionService,private router: Router,
+    ) { }
 
 
-  sessions: any;
+  sessions?: ICoachingSession;
   currentDate = new Date();
-  currentMonth: any = this.currentDate.toLocaleString('fr-FR', { month: 'long' });
-  currentMonthNumber:any;
+  currentMonth: number|string|any = this.currentDate.toLocaleString('fr-FR', { month: 'long' });
+  currentMonthNumber:number = this.currentDate.getMonth()+1;
   currentYear: number = this.currentDate.getFullYear();
-  monthSession: any = [];
-  yearSession: any = [];
-  daySession: any = [];
-  daysOfMonth: any[] = [];
-  goodMonth: any;
-  dateOfMonth: any = [];
-  informations: any = [];
-  payments:any = [];
-  clientPayment:any = [];
-  totalPayed:any = [];
+  daysOfMonth: number[] = [];
+  informations: IInformations[]= [];
+  payments:Ipayment[] = [];
+  totalPayed:ItotalPayed[]= [];
   totalWait?:number;
 
+  
+  goToDetailsClient(clientId : number){
+    this.router.navigate(['client', clientId]);
+  }
+  
   getSessionsPerDate() {
-    this.service.getSessionsPerDate(this.currentYear, "0"+this.currentMonthNumber, this.daysOfMonth[0])
+    this.service.getSessionsPerDate(this.currentYear, this.currentMonthNumber, this.daysOfMonth[0])
       .pipe(
         catchError((error) => {
           console.log(error);
           return of([]);
         })
       )
-      .subscribe((all: any) => {        
+      .subscribe((all: IInformations[]) => {        
         this.informations = all;
       });
     
@@ -74,7 +77,7 @@ export class DashboardComponent implements OnInit {
         return of([]);
       })
     )
-    .subscribe((payment:any)=>{
+    .subscribe((payment:Ipayment[])=>{
     this.payments = payment;
     
     })
@@ -82,17 +85,15 @@ export class DashboardComponent implements OnInit {
   }
   getPaymentsPerMonth(){
     
-    this.service.getPaymentsPerMonthPayed(("0"+this.currentMonthNumber), this.currentYear)
+    this.service.getPaymentsPerMonthPayed(this.currentMonthNumber, this.currentYear)
     .pipe(
       catchError((error)=>{
         console.log(error);
         return of([]);
       })
     )
-    .subscribe((totalpayed:any)=>{
-      console.log(totalpayed);
-      console.log('mois' + this.currentMonthNumber);
-     this.totalPayed =  totalpayed;
+    .subscribe((totalpayed:ItotalPayed[])=>{
+      this.totalPayed =  totalpayed;
     
     })
     
@@ -119,7 +120,7 @@ export class DashboardComponent implements OnInit {
     const monthLetter = date.toLocaleString('fr-FR', { month: 'long' });
     return monthLetter;
   }
-  getMonthNumber(monthString: any): string{
+  getMonthNumber(monthString: string): string{
     const monthNames = [
       "janvier", "février", "mars", "avril", "mai", "juin",
       "juillet", "août", "septembre", "octobre", "novembre", "décembre"
@@ -138,7 +139,19 @@ export class DashboardComponent implements OnInit {
     const newDate = new Date(date);
     return newDate.getFullYear();
   }
-  
+  formatDateTime(dateString: Date): string {
+    const date = new Date(dateString);
+    const day = date.getUTCDate();
+    const month = date.getUTCMonth() + 1; // Les mois sont indexés à partir de 0
+    const year = date.getUTCFullYear();
+    const hours = date.getUTCHours();
+    const minutes = date.getUTCMinutes();
+
+    const formattedMonth = month < 10 ? `0${month}` : month;
+    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+
+    return `${day}/${formattedMonth}/${year} ${hours}:${formattedMinutes}`;
+  }
   //**********************************************Planner***************************************************************//
 
   getDaysOfMonth() {
@@ -169,6 +182,7 @@ export class DashboardComponent implements OnInit {
     
     //j'attribut le weekdays à la variable daysOfMonth
     return this.daysOfMonth = weekDays;
+    
   }
   goToPreviousWeek() {
     //Je récupère la date d'aujourd'hui
@@ -185,7 +199,10 @@ export class DashboardComponent implements OnInit {
     }
     //Je récupère l'année
     this.currentYear = this.currentDate.getFullYear();
-    this.currentMonthNumber +=2;
+    //Si le type de currentMonthNumber est un nombre alors j'effectue mon calcul
+    if (typeof this.currentMonthNumber === 'number') {
+      this.currentMonthNumber += 2;
+    }
     
     
     
