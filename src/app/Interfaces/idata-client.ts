@@ -1,3 +1,5 @@
+import { IsessionList } from "./isession-list"
+
 export interface IdataClient {
     email: string,
     password: string,
@@ -9,7 +11,7 @@ export interface IdataClient {
     phone: string,
     problems: string,
     repetition_per_month: number,
-    session_list: Array<string>,
+    session_list: Array<IsessionList>,
     total_paid: number
     total_unpaid: number
     is_paid: boolean,

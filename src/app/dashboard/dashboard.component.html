@@ -2,10 +2,15 @@
   <h1 class="dashboard__title">Mélo-Active</h1>
   <div class="dashboard__planner">
     <div class="dashboard__planner__months">
-      <button (click)="goToPreviousMonth()">
-        < </button>
-          {{currentMonth }} {{currentYear}}
+      <div class="dashboard__planner__months__title">
+        <button class="dashboard__planner__months__title__cta">Nouvelle Séance</button>
+        <div>
+          <button (click)="goToPreviousMonth()">< </button>
+            {{currentMonth }} {{currentYear}}
           <button (click)="goToNextMonth()">></button>
+        </div>
+        <button class="dashboard__planner__months__title__cta">Recherche</button>
+      </div>
     </div>
     <div class="dashboard__planner__months__month">
       <button (click)="goToPreviousWeek()">
@@ -39,8 +44,11 @@
 
   </div>
   <div class="dashboard__paiements">
-    <h2 class="dashboard__paiements__title">Les paiements</h2>
-    <h3 class="dashboard__paiements__date">{{currentMonth }} {{currentYear}}</h3>
+    <div class="dashboard__paiements__header">
+    <h2 class="dashboard__paiements__header__title">Les paiements</h2>
+    <h3 class="dashboard__paiements__header__date">{{currentMonth }} {{currentYear}}</h3>
+    <img src="../../assets/More.png" alt="">
+  </div>
     <div class="dashboard__paiements__content">
       <button (click)="goToPreviousMonth()"><</button>
       <div  class="dashboard__paiements__content__liste">
@@ -60,6 +68,7 @@
                 <p>{{ formatDateTime(payment.date_session) }}</p>
                 <p>{{payment.price}}</p>
                 <p>{{payment.is_paid ? 'V' : 'X'}}</p>
+                <img src="../../assets/Pen.png" alt="">
               </div>
               <hr>
             </div>

@@ -1,36 +1,9 @@
 //**********************Font****************************//
-@import url('https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;600;700&family=Arimo:wght@400;500&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;600;700&family=Arimo:wght@400;500&display=swap');
 //****************Général****************//
 
-h1,
-h2,
-h3,
-h4 {
-    font-family: 'Alegreya', serif;
-    font-weight: 600;
-}
 
-h1 {
-    font-size: 4em;
-}
 
-h2 {
-    font-size: 2em;
-}
-
-h3 {
-    font-size: 1.2em;
-}
-
-p,
-span,
-div {
-    font-family: 'Arimo', sans-serif;
-}
-
-$background-button : rgba(255, 78, 0, 0.34);
-$primary-color : rgba(255, 156, 116, 0.96);
-$secondary-color : rgba(255, 156, 116, 0.96);
 
 body {
     margin: 0;
@@ -49,19 +22,32 @@ body {
             padding: 30px;
             margin: 30px;
             border-radius: 10px;
-            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            box-shadow: var(--box-shadow-back);
 
             &__months {
                 text-align: center;
                 text-transform: capitalize;
 
+                &__title {
+                    display: flex;
+                    justify-content: space-around;
 
-                button {
-                    background-color: $background-button;
-                    border-radius: 50%;
-                    width: 20px;
-                    height: 20px;
-                    border: none;
+                    &__cta{
+                        border-radius: 190px;
+                        border: 1px solid var(--primary-color);
+                        background: white;
+                        padding: 3px 50px;
+                    }
+
+                    div {
+                        button {
+                            background-color: var(--background-button);
+                            border-radius: 50%;
+                            width: 20px;
+                            height: 20px;
+                            border: none;
+                        }
+                    }
                 }
 
                 &__month {
@@ -71,7 +57,7 @@ body {
                     margin-top: 20px;
 
                     button {
-                        background-color: $background-button;
+                        background-color: var(--background-button);
                         border-radius: 50%;
                         width: 48px;
                         height: 48px;
@@ -85,7 +71,7 @@ body {
                         span {
                             border-radius: 190px;
                             background: #FFF;
-                            box-shadow: 0px 4px 4px 0px $primary-color;
+                            box-shadow:var(--box-shadow);
                             width: 6em;
                             height: 3em;
                             padding: 6px;
@@ -131,7 +117,7 @@ body {
                                     &__infos {
                                         border-radius: 0 0 30px 30px;
                                         padding: 7px;
-                                        box-shadow: 0px 4px 4px 0px $primary-color;
+                                        box-shadow: var(--box-shadow);
 
                                     }
 
@@ -152,18 +138,29 @@ body {
             padding: 30px;
             margin: 30px;
             border-radius: 10px;
-            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            box-shadow: var(--box-shadow-back);
 
-            &__date {
-                text-transform: capitalize;
+            &__header {
+                display: flex;
+                align-items: center;
+
+                &__title {
+                    flex-basis: 20%;
+                }
+
+                &__date {
+                    text-transform: capitalize;
+                    flex-basis: 72%;
+                }
             }
+
 
             &__content {
                 display: flex;
                 justify-content: space-between;
 
                 button {
-                    background-color: $background-button;
+                    background-color: var(--background-button);
                     border-radius: 50%;
                     width: 48px;
                     height: 48px;
@@ -172,7 +169,8 @@ body {
                 }
 
                 &__liste {
-                    box-shadow: 0px 4px 4px 0px $primary-color;
+                    box-shadow: 0px 4px 4px 0px var(--primary-color);
+                    border-radius: 10px;
                     width: 100%;
                     display: flex;
                     justify-content: center;
@@ -202,11 +200,17 @@ body {
                                 &__content {
                                     display: flex;
                                     justify-content: space-between;
+                                    align-items: center;
                                     padding: 0 5em;
 
                                     p {
                                         flex-basis: 12%;
                                         text-align: center;
+                                    }
+
+                                    img {
+                                        width: 30px;
+                                        height: 30px;
                                     }
                                 }
                             }
@@ -215,7 +219,7 @@ body {
 
                     &__total {
                         flex-basis: 10%;
-                        background-color: $secondary-color;
+                        background-color: var(--primary-color);
                         margin: 20px 0px 10px 0px;
                         text-align: center;
                         border-radius: 10px;
@@ -226,7 +230,8 @@ body {
                             color: #FFF;
                         }
 
-                        &__win, &__wait {
+                        &__win,
+                        &__wait {
                             font-weight: 500;
                             font-size: 1.5em;
 

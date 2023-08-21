@@ -40,13 +40,18 @@
                     <p [style.color]="cl.total_unpaid == 0 ? 'rgba(9, 171, 35, 0.96)' : 'rgba(252, 17, 17, 1)' ">{{cl.total_unpaid != 0? -cl.total_unpaid: cl.total_unpaid}}€</p>
                 </div>
                 <div class="details__client__general__payments__content__seance">
-                    <div *ngFor="let session of cl.session_list">
-                        {{session}}                
+                    <div *ngFor="let session of cl.session_list" class="details__client__general__payments__content__seance__details">
+                       <p> {{formatDateTime(session.Date)}}</p>           
+                       <p> {{session.Activity}}</p>           
+                       <p [style.color]='session.Ispaid == false ? "rgba(252, 17, 17, 1)" : "rgba(9, 171, 35, 0.96)" '> {{session.Price}}€</p>           
 
                     </div>
 
                 </div>
             </div>
+        </div>
+        <div  class="details__client__general">
+
         </div>
     </div>
 </div>
