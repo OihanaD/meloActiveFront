@@ -20,9 +20,9 @@
             <div class="dashboard__planner__months__month__days__day">
               {{ day }}
               <div *ngFor="let infos of informations"
-                class="dashboard__planner__months__month__days__day__all_sessions">
+                class="dashboard__planner__months__month__days__day__all-sessions">
                 <div *ngIf="day == infos.day"
-                  class="dashboard__planner__months__month__days__day__all_sessions__session" (click)="goToDetailsClient(infos.user_id)">
+                  class="dashboard__planner__months__month__days__day__all-sessions__session" (click)="goToDetailsClient(infos.user_id)">
                   <div class="dashboard__planner__months__month__days__day__all-sessions__session__name"
                     [ngStyle]="infos.activity_session === 'Sport' ? {'background-color': 'blue'} : (infos.activity_session === 'Nutrition' ? {'background-color': 'green'} : {'background-color': 'grey'})">
                     <img src="{{infos.user_image}}" alt="user photo">

@@ -5,9 +5,6 @@
 
 
 
-body {
-    margin: 0;
-
     .dashboard {
         background-image: url(../../assets/Ellipse.png), url(../../assets/Ellipse2.png);
         background-repeat: no-repeat;
@@ -37,6 +34,7 @@ body {
                         border: 1px solid var(--primary-color);
                         background: white;
                         padding: 3px 50px;
+                        cursor: pointer;
                     }
 
                     div {
@@ -46,6 +44,7 @@ body {
                             width: 20px;
                             height: 20px;
                             border: none;
+                            cursor: pointer;
                         }
                     }
                 }
@@ -62,6 +61,7 @@ body {
                         width: 48px;
                         height: 48px;
                         border: none;
+                        cursor: pointer;
                     }
 
                     &__days {
@@ -92,6 +92,8 @@ body {
                             margin-top: -7px;
 
                             &__all-sessions {
+                                cursor: pointer;
+
                                 &__session {
                                     padding: 7px;
                                     margin: 0px 5px;
@@ -152,6 +154,9 @@ body {
                     text-transform: capitalize;
                     flex-basis: 72%;
                 }
+                img{
+                    cursor: pointer;
+                }
             }
 
 
@@ -165,6 +170,7 @@ body {
                     width: 48px;
                     height: 48px;
                     border: none;
+                    cursor: pointer;
 
                 }
 
@@ -211,6 +217,7 @@ body {
                                     img {
                                         width: 30px;
                                         height: 30px;
+                                        cursor: pointer;
                                     }
                                 }
                             }
@@ -247,5 +254,3 @@ body {
             }
         }
     }
-
-}

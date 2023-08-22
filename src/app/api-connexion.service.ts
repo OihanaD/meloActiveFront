@@ -9,6 +9,7 @@ import { IInformations } from './Interfaces/i-informations';
 import { ItotalPayed } from './Interfaces/itotal-payed';
 import { Icoach } from './Interfaces/icoach';
 import { IdataClient } from './Interfaces/idata-client';
+import { Iclientslist } from './Interfaces/iclientslist';
 
 
 @Injectable({
@@ -26,10 +27,11 @@ export class ApiConnexionService {
   private urlInformations = "/api/informations";
   private urlpayments = "/api/payments";
   private urlpaymentsTotal = "/api/payments/total";
+  private clientList = "/api/client/infos";
 
 
-  getClients(): Observable<Iclient[]> {
-    return this.http.get<Iclient[]>(this.url + this.urlClients, {headers: new HttpHeaders({
+  getClients(): Observable<Iclientslist[]> {
+    return this.http.get<Iclientslist[]>(`${this.url}${this.clientList}`, {headers: new HttpHeaders({
       'Accept': 'application/json',
     })})
   }

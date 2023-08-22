@@ -1,4 +1,5 @@
 import { AfterViewInit, Component } from '@angular/core';
+import { Router } from '@angular/router';
 import {register} from 'swiper/element/bundle';
 
 
@@ -9,7 +10,13 @@ import {register} from 'swiper/element/bundle';
 })
 export class AppComponent implements AfterViewInit {
   title = 'melo_active_front';
+  constructor(private router: Router){
+
+  }
   ngAfterViewInit(): void {
     register();
+  }
+  goToHome(){
+    this.router.navigate(['home']);
   }
 }

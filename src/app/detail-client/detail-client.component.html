@@ -1,4 +1,5 @@
 <div class="content details">
+    <img src="../assets/homemelo.png" alt="home" (click)="goToHome()">
     <div *ngFor="let cl of client" class="details__client">
         <h1 class="details__client__title">{{cl.user_name}}</h1>
         <div class="details__client__informations">
@@ -10,7 +11,8 @@
             </div>
             <div class="details__client__informations__activity">
                 <div *ngFor="let activity of cl.activity" class="details__client__informations__activity__sticker">
-                    <p [style.backgroundColor]="activity === 'Nutrition' ? '#88FFBF' : (activity === 'Sport' ? '#FF8888' : 'transparent')">
+                    <p
+                        [style.backgroundColor]="activity === 'Nutrition' ? '#88FFBF' : (activity === 'Sport' ? '#FF8888' : 'transparent')">
                         {{ activity }}
                     </p>
                 </div>
@@ -19,16 +21,19 @@
         </div>
         <div class="details__client__general">
             <div class="details__client__general__objectif">
-                <div class="details__client__general__objectif__title"><h2>Les Objectifs</h2></div>
-                <p>{{cl.objectives? cl.objectives : "Je suis encore loin de mon objectif, mais j'en suis plus proche qu'hier."}} </p>
+                <div class="details__client__general__objectif__title">
+                    <h2>Les Objectifs</h2>
+                </div>
+                <p>{{cl.objectives? cl.objectives : "Je suis encore loin de mon objectif, mais j'en suis plus proche
+                    qu'hier."}} </p>
 
             </div>
             <div class="details__client__general__problems">
                 <h2>Les Problemes</h2>
-                <p>{{cl.problems? cl.problems : "Même si tu avances lentement, tu es toujours plus rapide que celle qui reste sur son canapé. "}} </p>
-
+                <p>{{cl.problems? cl.problems : "Même si tu avances lentement, tu es toujours plus rapide que celle qui
+                    reste sur son canapé. "}}
+                </p>
             </div>
-            
         </div>
         <div class="details__client__general__payments">
             <div class="details__client__general__payments__title">
@@ -37,21 +42,52 @@
             <div class="details__client__general__payments__content">
                 <div class="details__client__general__payments__content__unpaid">
                     <h3>Total du</h3>
-                    <p [style.color]="cl.total_unpaid == 0 ? 'rgba(9, 171, 35, 0.96)' : 'rgba(252, 17, 17, 1)' ">{{cl.total_unpaid != 0? -cl.total_unpaid: cl.total_unpaid}}€</p>
+                    <p [style.color]="cl.total_unpaid == 0 ? 'rgba(9, 171, 35, 0.96)' : 'rgba(252, 17, 17, 1)' ">
+                        {{cl.total_unpaid != 0? -cl.total_unpaid: cl.total_unpaid}}€</p>
                 </div>
                 <div class="details__client__general__payments__content__seance">
-                    <div *ngFor="let session of cl.session_list" class="details__client__general__payments__content__seance__details">
-                       <p> {{formatDateTime(session.Date)}}</p>           
-                       <p> {{session.Activity}}</p>           
-                       <p [style.color]='session.Ispaid == false ? "rgba(252, 17, 17, 1)" : "rgba(9, 171, 35, 0.96)" '> {{session.Price}}€</p>           
+                    <div *ngFor="let session of cl.session_list"
+                        class="details__client__general__payments__content__seance__details">
+                        <p> {{formatDate(session.Date)}}</p>
+                        <p> {{session.Activity}}</p>
+                        <p [style.color]='session.Ispaid == false ? "rgba(252, 17, 17, 1)" : "rgba(9, 171, 35, 0.96)" '>
+                            {{session.Price}}€</p>
+                        <img src="../../assets/Pen.png" alt="modify">
 
                     </div>
 
                 </div>
             </div>
         </div>
-        <div  class="details__client__general">
+        <div class="details__client__general__seances">
+            <div *ngFor="let session of cl.session_list" class="details__client__general__seances__list">
+                <div *ngIf="session.Objectif && formatDateTime(session.Date) > formatDateTime(currentDateTime)"
+                    class="details__client__general__seances__list__objectif">
+                    <div class="details__client__general__seances__list__objectif__title">
+                        <h2>Prochaine séance</h2>
+                        <img src="../../assets/Pen.png" alt="">
+                    </div>
+                    <div class="details__client__general__seances__list__objectif__content">
+                        <p> Le {{formatDate(session.Date)}}</p>
+                        <p>{{session.Objectif}} </p>
+                    </div>
+                </div>
+                <div *ngIf="session.Recap && formatDateTime(session.Date) < formatDateTime(currentDateTime)"
+                    class="details__client__general__seances__list__recap">
+                    <div class="details__client__general__seances__list__recap__title">
+                        <h2>Récap des séances</h2>
+                        <img src="../../assets/Pen.png" alt="">
+                    </div>
+                    <div class="details__client__general__seances__list__recap__content">
 
+
+                        <p> Le {{formatDate(session.Date)}}</p>
+                        <p>{{session.Recap}} </p>
+
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

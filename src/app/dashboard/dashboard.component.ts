@@ -53,15 +53,17 @@ export class DashboardComponent implements OnInit {
   goToDetailsClient(clientId : number){
     this.router.navigate(['client', clientId]);
   }
-  
+  goToHome(){
+    this.router.navigate(['home']);
+  }
   getSessionsPerDate() {
     this.service.getSessionsPerDate(this.currentYear, this.currentMonthNumber, this.daysOfMonth[0])
-      .pipe(
-        catchError((error) => {
-          console.log(error);
-          return of([]);
-        })
-      )
+      // .pipe(
+      //   catchError((error) => {
+      //     console.log(error);
+      //     return of([]);
+      //   })
+      // )
       .subscribe((all: IInformations[]) => {        
         this.informations = all;
       });
@@ -71,12 +73,12 @@ export class DashboardComponent implements OnInit {
   getPayments(){
     
     this.service.getPayments()
-    .pipe(
-      catchError((error)=>{
-        console.log(error);
-        return of([]);
-      })
-    )
+    // .pipe(
+    //   catchError((error)=>{
+    //     console.log(error);
+    //     return of([]);
+    //   })
+    // )
     .subscribe((payment:Ipayment[])=>{
     this.payments = payment;
     
@@ -86,33 +88,36 @@ export class DashboardComponent implements OnInit {
   getPaymentsPerMonth(){
     
     this.service.getPaymentsPerMonthPayed(this.currentMonthNumber, this.currentYear)
-    .pipe(
-      catchError((error)=>{
-        console.log(error);
-        return of([]);
-      })
-    )
+    // .pipe(
+    //   catchError((error)=>{
+    //     console.log(error);
+    //     return of([]);
+    //   })
+    // )
     .subscribe((totalpayed:ItotalPayed[])=>{
       this.totalPayed =  totalpayed;
     
     })
     
   }
+  
   getPaymentsWaiting(){
-    
+    console.time('getPaymentsWaiting')
     this.service.getPaymentsWaiting()
-    .pipe(
-      catchError((error)=>{
-        console.log(error);
-        return of([]);
-      })
-    )
-    .subscribe((totalwait:any)=>{
-      totalwait.forEach((total:any) => {
-        this.totalWait = total.total_wait_amount
-      });      
-    
-    })
+    // .pipe(
+    //   catchError((error)=>{
+    //     console.log(error);
+    //     return of([]);
+    //   })
+    // )
+    .subscribe((totalwait: any) => {
+      console.timeEnd('getPaymentsWaiting');
+      if (totalwait.length > 0) {
+        console.time('totalWaitAssignment');
+        this.totalWait = totalwait[0].total_wait_amount;
+        console.timeEnd('totalWaitAssignment');
+      }
+    });
     
   }
   getMonthLetter(dateString: Date): string {

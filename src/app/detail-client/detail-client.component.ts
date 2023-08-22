@@ -18,8 +18,10 @@ export class DetailClientComponent implements OnInit {
     private service: ApiConnexionService,
     private router: Router){}
 
+    currentDateTime : Date = new Date();
   ngOnInit(){
-    this.getClient()
+    this.getClient();
+    
   }
   getClient(){
     const id = this.route.snapshot.paramMap.get('id');
@@ -44,7 +46,7 @@ export class DetailClientComponent implements OnInit {
   goToHome(){
     this.router.navigate(['home']);
   }
-  formatDateTime(dateString: Date): string {
+  formatDate(dateString: Date): string {
     const date = new Date(dateString);
     const day = date.getUTCDate();
     const month = date.getUTCMonth() + 1; // Les mois sont indexés à partir de 0
@@ -57,4 +59,20 @@ export class DetailClientComponent implements OnInit {
 
     return `${day}/${formattedMonth}/${year}`;
   }
+  formatDateTime(dateString: Date): string {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1; // Les mois sont indexés à partir de 0
+    const year = date.getFullYear();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const secondes = date.getSeconds();
+
+    const formattedMonth = month < 10 ? `0${month}` : month;
+    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+    const formattedSecondes = secondes < 10 ? `0${secondes}` : secondes;
+
+    return `${day}/${formattedMonth}/${year} ${hours}:${formattedMinutes}:${formattedSecondes}`;
+  }
+  
 }

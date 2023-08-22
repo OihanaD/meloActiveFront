@@ -1,0 +1,72 @@
+.clients {
+    background-image: url(../../assets/Ellipse15.png);
+    background-repeat: no-repeat;
+    background-position: 20vw -17vh;
+
+    &__img {
+        width: 50px;
+        margin: 10px 0 0 10px;
+        cursor: pointer;
+    }
+
+    h1 {
+        text-align: center;
+        margin-top: 0;
+        padding-top: 5%;
+    }
+
+    &__filter {
+        display: flex;
+        margin: 7% 11% 0;
+        gap: 10%;
+    }
+
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: 2%;
+
+        &__content {
+            flex-basis: 20%;
+            box-shadow: var(--box-shadow);
+            margin: 30px;
+            padding: 10px;
+            border-radius: 10px;
+
+            &__card {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                gap: 12%;
+                margin-top: -36%;
+
+                &__picture {
+                    width: 7em;
+                    height: 7em;
+                    border-radius: 50%;
+                }
+
+                &__stickers {
+                    display: flex;
+                    padding-left: 27%;
+                    justify-content: center;
+                    gap: 2%;
+
+                    &__activity {
+
+                        p {
+                            padding: 10px;
+                            border-radius: 10px;
+                        }
+                    }
+                }
+
+                &__infos,
+                &__last-seance {
+                    text-align: center;
+                }
+            }
+        }
+    }
+}
