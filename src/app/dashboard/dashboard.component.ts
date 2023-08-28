@@ -32,6 +32,8 @@ export class DashboardComponent implements OnInit {
     this.getPayments();
     this.getPaymentsPerMonth();
     this.getPaymentsWaiting();
+    console.log(this.totalPayed);
+    
 
   }
   constructor(private service: ApiConnexionService,private router: Router,
@@ -56,14 +58,17 @@ export class DashboardComponent implements OnInit {
   goToHome(){
     this.router.navigate(['home']);
   }
+  goToClients(){
+    this.router.navigate(['clients']);
+  }
   getSessionsPerDate() {
     this.service.getSessionsPerDate(this.currentYear, this.currentMonthNumber, this.daysOfMonth[0])
-      // .pipe(
-      //   catchError((error) => {
-      //     console.log(error);
-      //     return of([]);
-      //   })
-      // )
+      .pipe(
+        catchError((error) => {
+          console.log(error);
+          return of([]);
+        })
+      )
       .subscribe((all: IInformations[]) => {        
         this.informations = all;
       });
@@ -73,12 +78,12 @@ export class DashboardComponent implements OnInit {
   getPayments(){
     
     this.service.getPayments()
-    // .pipe(
-    //   catchError((error)=>{
-    //     console.log(error);
-    //     return of([]);
-    //   })
-    // )
+    .pipe(
+      catchError((error)=>{
+        console.log(error);
+        return of([]);
+      })
+    )
     .subscribe((payment:Ipayment[])=>{
     this.payments = payment;
     
@@ -86,16 +91,20 @@ export class DashboardComponent implements OnInit {
     
   }
   getPaymentsPerMonth(){
-    
-    this.service.getPaymentsPerMonthPayed(this.currentMonthNumber, this.currentYear)
-    // .pipe(
-    //   catchError((error)=>{
-    //     console.log(error);
-    //     return of([]);
-    //   })
-    // )
+    // if(this.currentMonthNumber < 10 && !(this.currentMonthNumber.contains(0))){
+    //   this.currentMonth = 0 + cure
+    // }    
+    this.service.getPaymentsPerMonthPayed(`0${this.currentMonthNumber}`, this.currentYear)
+    .pipe(
+      catchError((error)=>{
+        console.log(error);
+        return of([]);
+      })
+    )
     .subscribe((totalpayed:ItotalPayed[])=>{
       this.totalPayed =  totalpayed;
+      console.log(totalpayed);
+      
     
     })
     
@@ -104,12 +113,12 @@ export class DashboardComponent implements OnInit {
   getPaymentsWaiting(){
     console.time('getPaymentsWaiting')
     this.service.getPaymentsWaiting()
-    // .pipe(
-    //   catchError((error)=>{
-    //     console.log(error);
-    //     return of([]);
-    //   })
-    // )
+    .pipe(
+      catchError((error)=>{
+        console.log(error);
+        return of([]);
+      })
+    )
     .subscribe((totalwait: any) => {
       console.timeEnd('getPaymentsWaiting');
       if (totalwait.length > 0) {

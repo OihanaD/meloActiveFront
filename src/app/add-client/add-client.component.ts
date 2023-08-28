@@ -8,14 +8,12 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./add-client.component.scss']
 })
 export class AddClientComponent {
-  form?: FormControl;
-
-  constructor(private activatedRoute: ActivatedRoute, private router: Router) {
-      this.initForm();
-  }
-
-  initForm() {
-      this.form =  new FormControl('');
-
+  profileForm = new FormGroup({
+    firstName: new FormControl(''),
+    lastName: new FormControl(''),
+  });
+  onSubmit() {
+    // TODO: Use EventEmitter with form value
+    console.warn(this.profileForm.value);
   }
 }

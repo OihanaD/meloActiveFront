@@ -17,10 +17,15 @@ export class ListeClientComponent implements OnInit {
     private router: Router) { }
   ngOnInit() {
     this.getClientsInfos();
+    
   }
   goToHome(){
     this.router.navigate(['home']);
   }
+  goToDetailsClient(clientId:any){
+    this.router.navigate(['client'],clientId);
+  }
+  
   getClientsInfos() {
     this.service.getClients()
       .pipe(

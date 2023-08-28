@@ -75,6 +75,8 @@ export class ApiConnexionService {
     })})
   }
   getPaymentsPerMonthPayed(month:string|number, year:number):Observable<ItotalPayed[]>{
+    console.log(`${this.url}${this.urlpaymentsTotal}/${month}/${year}`);
+    
     return this.http.get<ItotalPayed[]>(`${this.url}${this.urlpaymentsTotal}/${month}/${year}`, {headers: new HttpHeaders({
       'Accept': 'application/json',
     })})
