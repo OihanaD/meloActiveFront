@@ -1,10 +1,26 @@
 <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
 
-    <label for="first-name">First Name: </label>
-    <input id="first-name" type="text" formControlName="firstName">
-  
-    <label for="last-name">Last Name: </label>
-    <input id="last-name" type="text" formControlName="lastName">
+    <label for="clientId">Client: </label>
+    <select id="clientId" formControlName="clientId" [(ngModel)]="selectedClientName">
+        <option *ngFor="let clientName of clientsName" [value]="clientName">{{ clientName }}</option>
+    </select>
+
+    <label for="activity">Activity: </label>
+    <input id="activity" type="text" formControlName="activity">
+
+    <label for="objectif">Objectif: </label>
+    <input id="objectif" type="text" formControlName="objectif">
+
+    <label for="Price">Prix: </label>
+    <input id="Price" type="number" formControlName="price">
+
+    <label for="date">Date: </label>
+    <input id="date" type="datetime-local" formControlName="date">
+
+
     <button type="submit" [disabled]="!profileForm.valid">Submit</button>
+    <div *ngIf="successMessage">
+        <p>{{ message }}</p>
+      </div>
   
 </form>

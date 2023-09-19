@@ -1,10 +1,8 @@
 import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ApiConnexionService } from '../api-connexion.service';
-import { CommonModule, WeekDay } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { SwiperDirectiveDirective } from '../swiper-directive.directive';
-import { A11y, Mousewheel, Navigation, Pagination, SwiperOptions } from 'swiper';
-import { Observable, catchError, empty, of } from 'rxjs';
-import { DatePipe } from '@angular/common';
+import { catchError, of } from 'rxjs';
 import { ICoachingSession } from '../Interfaces/icoaching-session';
 import { IInformations } from '../Interfaces/i-informations';
 import { Ipayment } from '../Interfaces/ipayment';

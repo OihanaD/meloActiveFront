@@ -35,6 +35,11 @@ export class ApiConnexionService {
       'Accept': 'application/json',
     })})
   }
+  getAllClients(): Observable<any> {
+    return this.http.get<any>(`${this.url}${this.urlClients}`, {headers: new HttpHeaders({
+      'Accept': 'application/json',
+    })})
+  }
   getClienById(id:string):Observable<IdataClient[]>{
     return this.http.get<IdataClient[]>(`${this.url}${this.urlClient}/${id}`, {headers: new HttpHeaders({
       'Accept': 'application/json',
@@ -86,5 +91,11 @@ export class ApiConnexionService {
       'Accept': 'application/json',
     })})
   }
+
+  addSession(data:any):any{
+     this.http.post(this.url +'/api/session/adding', data).subscribe((result)=>
+     console.warn(result));
+  }
+
 
 }
