@@ -12,11 +12,13 @@ import { Iclientslist } from '../Interfaces/iclientslist';
 })
 export class AddClientComponent implements OnInit {
   clients: any;
-  clientId?: number;
+  clientId?: number|string;
   message?: string;
   clientsName = [];
   selectedClientName?: string;
+  selectedActivity?: string;
   successMessage?: boolean;
+  activities?: any;
 
   constructor(private service: ApiConnexionService, private router: Router,
   ) { }
@@ -47,6 +49,23 @@ export class AddClientComponent implements OnInit {
         const filteredClients = all.filter((item: any) => item.user);
         const clientNames = filteredClients.map((client: any) => client.user.name);
         this.clientsName = clientNames;
+
+        this.activities = all.map((client: any) => client.activity);
+        console.log(this.activities);
+
+        // Créer un ensemble (Set) pour stocker les activités uniques
+        const uniqueActivities = new Set();
+
+        // Parcourir toutes les activités et ajouter leur nom à l'ensemble (en excluant ceux avec "|")
+        this.activities.forEach((activity:any) => {
+          if (!activity.includes("|")) {
+            uniqueActivities.add(activity);
+          }
+        });
+
+        // Convertir l'ensemble en tableau pour obtenir les activités uniques
+        this.activities = Array.from(uniqueActivities);
+
       });
 
   };
@@ -79,5 +98,9 @@ export class AddClientComponent implements OnInit {
     setTimeout(() => {
       this.router.navigate(['/home']);
     }, 2000);
+  }
+
+  cancel(){
+    this.profileForm.reset();
   }
 }

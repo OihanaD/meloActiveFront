@@ -68,7 +68,14 @@
                 &__days {
                     width: 13.28%;
                     text-align: center;
-
+                    overflow-y: scroll;
+                    &::-webkit-scrollbar {
+                        width: 7px;
+                    }
+                    &::-webkit-scrollbar-thumb {
+                        background-color: #ffa079;
+                        border-radius: 10px;
+                    }
                     span {
                         border-radius: 190px;
                         background: #FFF;

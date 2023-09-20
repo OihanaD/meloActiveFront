@@ -1,0 +1,60 @@
+.form-client {
+    background-image: url(../../assets/Ellipse3.png), ;
+    background-repeat: no-repeat;
+    height: 100vh;
+
+    &__content {
+        padding: 14%;
+        border: 53px solid #ffa079;
+
+        h2 {
+            text-align: center;
+        }
+
+        &__form {
+
+            &__client-activity,
+            &__date-price {
+                display: flex;
+                justify-content: space-around;
+
+                &__client,
+                &__activity,
+                &__date,
+                &__price {
+                    display: flex;
+                    flex-direction: column;
+                    max-width: 150px;
+                    width: 100%;
+                    padding: 10px;
+
+                    select,
+                    input {
+                        border-radius: 34px;
+                        box-shadow: 0px 1px 2px 0px #FFA079;
+                        border: 1px solid #00000021;
+                        padding: 10px;
+                    }
+
+                }
+
+            }
+
+            &__objectif {
+                display: flex;
+                flex-direction: column;
+                width: 67%;
+                margin-left: 17%;
+                padding: 10px;
+
+                textarea {
+                    border-radius: 34px;
+                    box-shadow: 0px 1px 2px 0px #FFA079;
+                    border: 1px solid #00000021;
+                    padding: 10px;
+                }
+
+            }
+        }
+    }
+}

@@ -1,26 +1,42 @@
-<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+<div class="content form-client">
+    <div class="form-client__content">
+        <h2>Ajout d'une séance</h2>
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="form-client__content__form">
+            <div class="form-client__content__form__client-activity">
+                <div class="form-client__content__form__client-activity__client">
+                    <label for="clientId">Client: </label>
+                    <select id="clientId" formControlName="clientId" [(ngModel)]="selectedClientName">
+                        <option *ngFor="let clientName of clientsName" [value]="clientName">{{ clientName }}</option>
+                    </select>
+                </div>
+                <div class="form-client__content__form__client-activity__activity">
+                    <label for="activity">Activity: </label>
+                    <select id="activity" formControlName="activity" [(ngModel)]="selectedActivity">
+                        <option *ngFor="let activity of activities" [value]="activity">{{ activity }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-client__content__form__date-price">
+                <div class="form-client__content__form__date-price__date">
+                    <label for="date">Date: </label>
+                    <input id="date" type="datetime-local" formControlName="date">
+                </div>
+                <div class="form-client__content__form__date-price__price">
+                    <label for="Price">Prix: </label>
+                    <input id="Price" type="number" formControlName="price">
+                </div>
+            </div>
+            <div class="form-client__content__form__objectif">
+                <label for="objectif">Objectif: </label>
+                <textarea id="objectif" type="text" formControlName="objectif"></textarea>
+            </div>
+            <button type="button"(click)='cancel()'>Annuler</button>
+            
+            <button type="submit" [disabled]="!profileForm.valid">Submit</button>
+            <div *ngIf="successMessage">
+                <p>{{ message }}</p>
+            </div>
 
-    <label for="clientId">Client: </label>
-    <select id="clientId" formControlName="clientId" [(ngModel)]="selectedClientName">
-        <option *ngFor="let clientName of clientsName" [value]="clientName">{{ clientName }}</option>
-    </select>
-
-    <label for="activity">Activity: </label>
-    <input id="activity" type="text" formControlName="activity">
-
-    <label for="objectif">Objectif: </label>
-    <input id="objectif" type="text" formControlName="objectif">
-
-    <label for="Price">Prix: </label>
-    <input id="Price" type="number" formControlName="price">
-
-    <label for="date">Date: </label>
-    <input id="date" type="datetime-local" formControlName="date">
-
-
-    <button type="submit" [disabled]="!profileForm.valid">Submit</button>
-    <div *ngIf="successMessage">
-        <p>{{ message }}</p>
-      </div>
-  
-</form>
+        </form>
+    </div>
+</div>
