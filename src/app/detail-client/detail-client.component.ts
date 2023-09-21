@@ -33,9 +33,7 @@ export class DetailClientComponent implements OnInit {
           alert("Aucun Client trouvé");
           this.goToHome();
         }
-        this.client = client;
-
-        
+        this.client = client;        
       },
       (error) => {
         console.log(error);

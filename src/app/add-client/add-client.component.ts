@@ -102,5 +102,6 @@ export class AddClientComponent implements OnInit {
 
   cancel(){
     this.profileForm.reset();
+    this.router.navigate(['/home']);
   }
 }

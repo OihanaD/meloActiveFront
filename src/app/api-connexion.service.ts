@@ -10,14 +10,16 @@ import { ItotalPayed } from './Interfaces/itotal-payed';
 import { Icoach } from './Interfaces/icoach';
 import { IdataClient } from './Interfaces/idata-client';
 import { Iclientslist } from './Interfaces/iclientslist';
-
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { AddClientComponent } from './add-client/add-client.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiConnexionService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private dialog: MatDialog
+    ) { }
   private url = 'http://127.0.0.1:8000';
   private urlClients = "/api/clients";
   private urlClient = "/api/client/details";
@@ -29,29 +31,27 @@ export class ApiConnexionService {
   private urlpaymentsTotal = "/api/payments/total";
   private clientList = "/api/client/infos";
 
-
-  getClients(): Observable<Iclientslist[]> {
-    return this.http.get<Iclientslist[]>(`${this.url}${this.clientList}`, {headers: new HttpHeaders({
+ private httpOptions = {
+    headers: new HttpHeaders({
       'Accept': 'application/json',
-    })})
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+    })
+  };
+  
+  getClients(): Observable<Iclientslist[]> {
+    return this.http.get<Iclientslist[]>(`${this.url}${this.clientList}`,  this.httpOptions)
   }
   getAllClients(): Observable<any> {
-    return this.http.get<any>(`${this.url}${this.urlClients}`, {headers: new HttpHeaders({
-      'Accept': 'application/json',
-    })})
+    
+    return this.http.get<any>(`${this.url}${this.urlClients}`, this.httpOptions)
   }
   getClienById(id:string):Observable<IdataClient[]>{
-    return this.http.get<IdataClient[]>(`${this.url}${this.urlClient}/${id}`, {headers: new HttpHeaders({
-      'Accept': 'application/json',
-    })})
+    return this.http.get<IdataClient[]>(`${this.url}${this.urlClient}/${id}`,this.httpOptions)
   }
   getCoachSession(): Observable<ICoachingSession[]> {
     const currentYear = new Date().getFullYear();
-    return this.http.get<ICoachingSession[]>(this.url + this.urlCoachSession, {
-      headers: new HttpHeaders({
-        'Accept': 'application/json',
-      })
-    }).pipe(
+    return this.http.get<ICoachingSession[]>(this.url + this.urlCoachSession,this.httpOptions).pipe(
       map(sessions => sessions.filter(session => {
         const sessionYear = new Date(session.date_session).getFullYear();
         return sessionYear === currentYear;
@@ -59,37 +59,25 @@ export class ApiConnexionService {
     );
   }
   getClientsCoachingSessions(): Observable<IClientsCoachingSession[]> {
-    return this.http.get<IClientsCoachingSession[]>(this.url+this.urlClientCoachSession, {headers: new HttpHeaders({
-      'Accept': 'application/json',
-    })})
+    return this.http.get<IClientsCoachingSession[]>(this.url+this.urlClientCoachSession, this.httpOptions)
   }
   getCoach(): Observable<Icoach[]> {
-    return this.http.get<Icoach[]>(this.url + this.urlCoach, {headers: new HttpHeaders({
-      'Accept': 'application/json',
-    })})
+    return this.http.get<Icoach[]>(this.url + this.urlCoach,this.httpOptions)
   }
   getSessionsPerDate(year:number, month:number, firstday:number):Observable<IInformations[]>{
     console.log(month)
-    return this.http.get<IInformations[]>(`${this.url}${this.urlInformations}/${year}/${month}/${firstday}`, {headers: new HttpHeaders({
-      'Accept': 'application/json',
-    })})
+    return this.http.get<IInformations[]>(`${this.url}${this.urlInformations}/${year}/${month}/${firstday}`, this.httpOptions)
   }
   getPayments():Observable<Ipayment[]>{
-    return this.http.get<Ipayment[]>(this.url + this.urlpayments, {headers: new HttpHeaders({
-      'Accept': 'application/json',
-    })})
+    return this.http.get<Ipayment[]>(this.url + this.urlpayments, this.httpOptions)
   }
   getPaymentsPerMonthPayed(month:string|number, year:number):Observable<ItotalPayed[]>{
-    console.log(`${this.url}${this.urlpaymentsTotal}/${month}/${year}`);
+    console.log(localStorage.getItem('access_token'));
     
-    return this.http.get<ItotalPayed[]>(`${this.url}${this.urlpaymentsTotal}/${month}/${year}`, {headers: new HttpHeaders({
-      'Accept': 'application/json',
-    })})
+    return this.http.get<ItotalPayed[]>(`${this.url}${this.urlpaymentsTotal}/${month}/${year}`,this.httpOptions)
   }
   getPaymentsWaiting():Observable<number>{ 
-    return this.http.get<number>(`${this.url}${this.urlpaymentsTotal}/wait`, {headers: new HttpHeaders({
-      'Accept': 'application/json',
-    })})
+    return this.http.get<number>(`${this.url}${this.urlpaymentsTotal}/wait`,this.httpOptions)
   }
 
   addSession(data:any):any{

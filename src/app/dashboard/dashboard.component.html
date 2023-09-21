@@ -1,10 +1,10 @@
 <div class="content dashboard">
-  <div (click)="goToClients()">Tout mes clients</div>
+  <div (click)="goToClients()" class="dashboard__clients"><img src="../../assets/Group 127.png" alt="les clients"></div>
   <h1 class="dashboard__title">Mélo-Active</h1>
   <div class="dashboard__planner">
     <div class="dashboard__planner__months">
       <div class="dashboard__planner__months__title">
-        <button class="dashboard__planner__months__title__cta">Nouvelle Séance</button>
+        <button class="dashboard__planner__months__title__cta" (click)="openForm()">Nouvelle Séance</button>
         <div>
           <button (click)="goToPreviousMonth()">< </button>
             {{currentMonth }} {{currentYear}}

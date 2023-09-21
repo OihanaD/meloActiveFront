@@ -9,7 +9,9 @@
     background-image: url(../../assets/Ellipse.png), url(../../assets/Ellipse2.png);
     background-repeat: no-repeat;
     background-position: right top, left 70vh;
-
+    &__clients{
+        cursor: pointer;
+    }
     &__title {
         text-align: center;
         margin-top: 0;
@@ -281,4 +283,171 @@
             }
         }
     }
+}
+
+@media (max-width:900px) {
+    
+.dashboard {
+    
+    &__clients{
+    }
+    &__title {
+        
+    }
+
+    &__planner {
+       
+        &__months {
+            &__title {
+            
+
+                &__cta {
+                    
+                }
+
+                div {
+                    button {
+                        
+                    }
+                }
+            }
+
+            &__month {
+                
+                justify-content: center;
+
+                button {
+                   
+                }
+
+                &__days {
+                    width: 74%;
+                    span {
+                       
+                    }
+
+                    &__day {
+                        height: 8vh;
+
+                        &__all-sessions {
+
+                            &__session {
+                               
+                                &__name {
+                                    
+
+                                    img {
+                                    
+
+                                    }
+
+                                }
+
+                                &__infos {
+                                    
+
+                                    div:first-child {
+                                        
+                                    }
+
+                                    div {
+                                    }
+
+                                    div:last-child {
+
+                                    }
+
+                                }
+
+
+                            }
+                        }
+
+                    }
+
+                }
+
+
+            }
+        }
+    }
+
+    &__paiements {
+        
+
+        &__header {
+            
+            &__title {
+            }
+
+            &__date {
+              
+            }
+
+            img {
+            }
+        }
+
+
+        &__content {
+            
+            button {
+               
+
+            }
+
+            &__liste {
+                
+                &__seances {
+
+                    &__title {
+
+                      
+
+                        h3 {
+                            
+                        }
+                    }
+
+                    &__details {
+                        hr {
+                           
+                        }
+
+                        &__seance {
+                            &__content {
+                                
+
+                                p {
+                                }
+
+                                img {
+                                    
+                                }
+                            }
+                        }
+                    }
+                }
+
+                &__total {
+                    
+
+                    h3 {
+    
+                    }
+
+                    &__win,
+                    &__wait {
+                       
+                        &__euro {
+                            
+                        }
+                    }
+                }
+
+
+            }
+        }
+    }
+}
 }

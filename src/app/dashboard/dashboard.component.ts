@@ -8,6 +8,11 @@ import { IInformations } from '../Interfaces/i-informations';
 import { Ipayment } from '../Interfaces/ipayment';
 import { ItotalPayed } from '../Interfaces/itotal-payed';
 import { Router } from '@angular/router';
+import { MatDialogConfig } from '@angular/material/dialog';
+import { AddClientComponent } from '../add-client/add-client.component';
+
+
+
 
 
 @Component({
@@ -34,8 +39,9 @@ export class DashboardComponent implements OnInit {
     
 
   }
-  constructor(private service: ApiConnexionService,private router: Router,
-    ) { }
+  constructor(private service: ApiConnexionService,
+              private router: Router
+             ) { }
 
 
   sessions?: ICoachingSession;
@@ -49,6 +55,10 @@ export class DashboardComponent implements OnInit {
   totalPayed:ItotalPayed[]= [];
   totalWait?:number;
 
+  openForm(){
+
+  this.router.navigate(['client/add']);
+  }
   
   goToDetailsClient(clientId : number){
     this.router.navigate(['client', clientId]);

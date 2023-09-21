@@ -30,13 +30,14 @@
                 <label for="objectif">Objectif: </label>
                 <textarea id="objectif" type="text" formControlName="objectif"></textarea>
             </div>
-            <button type="button"(click)='cancel()'>Annuler</button>
-            
-            <button type="submit" [disabled]="!profileForm.valid">Submit</button>
-            <div *ngIf="successMessage">
-                <p>{{ message }}</p>
-            </div>
+            <div class="form-client__content__form__action">
+                <button type="button" (click)='cancel()' class="form-client__content__form__action__cancel">Annuler</button>
 
+                <button type="submit" [disabled]="!profileForm.valid" class="form-client__content__form__action__submit">Submit</button>
+                <div *ngIf="successMessage">
+                    <p>{{ message }}</p>
+                </div>
+            </div>
         </form>
     </div>
 </div>
