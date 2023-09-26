@@ -1,29 +1,36 @@
-// //**********************Font****************************//
-//  @import url('https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;700&family=Arimo:wght@400;500&display=swap');
-// //****************Général****************//
+/* Styles pour la barre de navigation */
+.navbar {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    position: sticky;
+    top: 0.3px;
+    z-index: 5000;
+    height: 5vh;
+}
 
-// h1,
-// h2,
-// h3,
-// h4 {
-//     font-family: 'Alegreya', serif;
-//     font-weight: 600;
-// }
+.logo {
+    font-size: 24px;
+}
 
-// h1 {
-//     font-size: 4em;
-// }
+.nav-links {
+    list-style: none;
+    display: flex;
+}
 
-// h2 {
-//     font-size: 2em;
-// }
+.nav-links li {
+    margin-right: 20px;
+}
 
-// h3 {
-//     font-size: 1.2em;
-// }
+.nav-links a {
+    text-decoration: none;
+    color: white;
+}
+@media (max-width:950px) {
+    
+}
 
-// p,
-// span,
-// div {
-//     font-family: 'Arimo', sans-serif;
-// }
+

@@ -11,13 +11,15 @@ import { Iclientslist } from '../Interfaces/iclientslist';
 })
 export class ListeClientComponent implements OnInit {
   clientsList: Iclientslist[] = [];
+  currentFilter: string = 'Tous';
+  filteredClients:Iclientslist[]= this.clientsList;
+  is_active?:boolean;
   constructor(
     private route: ActivatedRoute,
     private service: ApiConnexionService,
     private router: Router) { }
   ngOnInit() {
     this.getClientsInfos();
-    
   }
   goToHome(){
     this.router.navigate(['home']);
@@ -36,11 +38,29 @@ export class ListeClientComponent implements OnInit {
       )
       .subscribe((all: Iclientslist[]) => {
         this.clientsList = all;
+        this.filteredClients = all;
         console.log(this.clientsList);
 
       });
 
   };
+  applyFilter(filter: string) {
+    console.log(filter);
+    console.log(this.clientsList);
+
+    if (filter === 'Tous') {
+        this.currentFilter = filter;
+        this.filteredClients = this.clientsList; // Afficher tous les clients
+    } else {
+        this.currentFilter = filter;
+        this.filteredClients = this.clientsList.filter(client => client.activity.includes(this.currentFilter)); // Filtrer par activité
+    }
+
+ this.is_active =true;
+}
+
+
+
   formatDate(dateString: Date): string {
     const date = new Date(dateString);
     const day = date.getUTCDate();

@@ -35,7 +35,6 @@ export class DashboardComponent implements OnInit {
     this.getPayments();
     this.getPaymentsPerMonth();
     this.getPaymentsWaiting();
-    console.log(this.totalPayed);
     
 
   }
@@ -98,10 +97,7 @@ export class DashboardComponent implements OnInit {
     })
     
   }
-  getPaymentsPerMonth(){
-    // if(this.currentMonthNumber < 10 && !(this.currentMonthNumber.contains(0))){
-    //   this.currentMonth = 0 + cure
-    // }    
+  getPaymentsPerMonth(){   
     this.service.getPaymentsPerMonthPayed(`0${this.currentMonthNumber}`, this.currentYear)
     .pipe(
       catchError((error)=>{
@@ -128,11 +124,8 @@ export class DashboardComponent implements OnInit {
       })
     )
     .subscribe((totalwait: any) => {
-      console.timeEnd('getPaymentsWaiting');
       if (totalwait.length > 0) {
-        console.time('totalWaitAssignment');
         this.totalWait = totalwait[0].total_wait_amount;
-        console.timeEnd('totalWaitAssignment');
       }
     });
     

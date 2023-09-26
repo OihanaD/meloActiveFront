@@ -1,20 +1,18 @@
 <div class="content clients">
-    <img src="../assets/homemelo.png" alt="home" (click)="goToHome()" class="clients__img">
     <h1>Liste de tous mes clients</h1>
     <div class="clients__filter">
-        <div class="clients__filter__all">Tous</div>
-        <div class="clients__filter__sport">Sport</div>
-        <div class="clients__filter__nutrition">Nutrition</div>
-        <img src="../../assets/More.png" alt="">
+        <div class="clients__filter__all" (click)="applyFilter('Tous')"[ngClass]="{'selected':  currentFilter === 'Tous'}">Tous</div>
+        <div class="clients__filter__sport" (click)="applyFilter('Sport')"[ngClass]="{'selected':  currentFilter === 'Sport'}">Sport</div>
+        <div class="clients__filter__nutrition" (click)="applyFilter('Nutrition')"[ngClass]="{'selected':  currentFilter === 'Nutrition'}">Nutrition</div>
+        <img src="../../assets/More.png" alt="button add">
     </div>
     <div class="clients__list">
 
-        <div class="clients__list__content" *ngFor="let client of clientsList" >
-            <img src="{{client.user_image}}" alt="" class="clients__list__content__card__picture">
+        <div class="clients__list__content" *ngFor="let client of filteredClients">
 
             <div class="clients__list__content__card">
-                <div class="clients__list__content__card__name">{{client.user_name}}</div>
-                <img src="../../assets/Pen.png" alt="" class="clients__list__content__card__modify">
+                <h2 class="clients__list__content__card__name">{{client.user_name}}</h2>
+                <img src="../../assets/Pen.png" alt="button add" class="clients__list__content__card__modify">
             </div>
             <div class="clients__list__content__card__stickers">
                 <div class="clients__list__content__card__stickers__activity" *ngFor="let activity of client.activity">
@@ -28,7 +26,8 @@
                 <p> {{client.email}}</p>
                 <p *ngIf="client.phone != null"> {{client.phone}}</p>
             </div>
-            <div  *ngIf="client.last_session_date" class="clients__list__content__card__last-seance">Dernière séance le : {{formatDate(client.last_session_date)}}</div>
+            <div *ngIf="client.last_session_date" class="clients__list__content__card__last-seance">Dernière séance le :
+                {{formatDate(client.last_session_date)}}</div>
         </div>
     </div>
 

@@ -4,7 +4,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { DetailClientComponent } from './detail-client/detail-client.component';
 import { ListeClientComponent } from './liste-client/liste-client.component';
 import { AddClientComponent } from './add-client/add-client.component';
-import { AuthGuard } from './auth.guard';
+// import { AuthGuard } from './auth.guard';
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [

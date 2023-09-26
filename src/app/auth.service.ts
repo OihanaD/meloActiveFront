@@ -30,13 +30,13 @@ export class AuthService {
  
     signIn(user: any) {
       console.log('iciok');
-      console.log(user);
+      // console.log(user);
       
       this.http
         .post<any>('http://127.0.0.1:8000/api/login', user)
         .subscribe((res: any) => {
           localStorage.setItem('access_token', res.token);
-          console.log(res.token);
+          // console.log(res.token);
           
           
           // this.getUserProfile(res._id).subscribe((res) => {

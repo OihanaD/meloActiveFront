@@ -29,7 +29,8 @@ h3 {
 p,
 span,
 div {
-    font-family: 'Arimo', sans-serif;
+    font-family: var(--font-paragraphe);
+    font-weight: 400;
 }
 /* width */
 body::-webkit-scrollbar {
@@ -44,13 +45,11 @@ body::-webkit-scrollbar {
    
   /* Handle */
   body::-webkit-scrollbar-thumb {
-    background: red; 
+    background: var(--secondary-color); 
     border-radius: 10px;
   }
   
   /* Handle on hover */
   body::-webkit-scrollbar-thumb:hover {
-    background: #b30000; 
+    background: var(--primary-color);  
   }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

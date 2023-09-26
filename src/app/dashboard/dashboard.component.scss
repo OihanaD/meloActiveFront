@@ -1,24 +1,19 @@
-//**********************Font****************************//
-// @import url('https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;600;700&family=Arimo:wght@400;500&display=swap');
-//****************Général****************//
-
-
-
-
 .dashboard {
     background-image: url(../../assets/Ellipse.png), url(../../assets/Ellipse2.png);
     background-repeat: no-repeat;
     background-position: right top, left 70vh;
-    &__clients{
+
+    &__clients {
         cursor: pointer;
     }
+
     &__title {
         text-align: center;
         margin-top: 0;
     }
 
     &__planner {
-        padding: 30px;
+        padding: 19px;
         margin: 30px;
         border-radius: 10px;
         box-shadow: var(--box-shadow-back);
@@ -31,13 +26,15 @@
             &__title {
                 display: flex;
                 justify-content: space-around;
+                align-items: center;
 
                 &__cta {
                     border-radius: 190px;
-                    border: 1px solid var(--primary-color);
-                    background: white;
+                    background: rgba(255, 156, 116, 0.96);
                     padding: 3px 50px;
+                    border: none;
                     cursor: pointer;
+                    color: white;
                 }
 
                 div {
@@ -70,19 +67,15 @@
                 &__days {
                     width: 13.28%;
                     text-align: center;
-                    overflow-y: scroll;
-                    &::-webkit-scrollbar {
-                        width: 7px;
-                    }
-                    &::-webkit-scrollbar-thumb {
-                        background-color: #ffa079;
-                        border-radius: 10px;
-                    }
+                    // overflow-y: scroll;
+
+
+
                     span {
                         border-radius: 190px;
                         background: #FFF;
                         box-shadow: var(--box-shadow);
-                        width: 6em;
+                        width: 7em;
                         height: 2em;
                         padding: 6px;
                         display: flex;
@@ -100,57 +93,71 @@
                         margin: 0 5px;
                         border-radius: 20px;
                         margin-top: -7px;
+                        position: sticky;
+                        overflow-y: scroll;
 
-                        &__all-sessions {
-                            cursor: pointer;
+                        &::-webkit-scrollbar {
+                            width: 7px;
+                        }
 
-                            &__session {
-                                padding: 7px;
-                                margin: 0px 5px;
+                        &::-webkit-scrollbar-thumb {
+                            background-color: #ffa079;
+                            border-radius: 10px;
+                        }
 
-                                &__name {
-                                    border-radius: 20px 20px 0px 0px;
-                                    display: flex;
+                        &__all {
+                            &__sessions {
+                                cursor: pointer;
 
-                                    img {
-                                        width: 45%;
-                                        height: 49px;
-                                        border-radius: 67%;
-                                        margin-left: 10%;
-
-                                    }
-
-                                    // h3 {
-                                    //     margin: 0px 20px;
-                                    //     color: white;
-                                    // }
-                                }
-
-                                &__infos {
-                                    border-radius: 10px;
+                                &__session {
                                     padding: 7px;
-                                    box-shadow: var(--box-shadow);
-                                    margin-top: -20px;
+                                    margin: 0px 5px;
 
-                                    div:first-child {
-                                        text-align: end;
-                                        font-size: 10px;
-                                        font-weight: 700;
+                                    &__name {
+                                        border-radius: 20px 20px 0px 0px;
+                                        display: flex;
+
+                                        img {
+                                            width: 45%;
+                                            height: 49px;
+                                            border-radius: 67%;
+                                            margin-left: 10%;
+
+                                        }
+
+
                                     }
 
-                                    div {
-                                        margin: 0 0 10px 0;
+                                    &__infos {
+
+                                        border-radius: 10px;
+                                        padding: 7px;
+                                        box-shadow: var(--box-shadow);
+
+                                        &__user-hour {
+                                            display: flex;
+                                            align-items: center;
+                                            flex-direction: row-reverse;
+
+                                            div:first-child {
+                                                text-align: end;
+                                                font-size: 10px;
+                                                font-weight: 700;
+                                            }
+
+                                            div {
+                                                margin: 0 0 10px 0;
+                                            }
+
+                                            div:last-child {
+                                                width: 80%;
+                                            }
+
+                                        }
                                     }
 
-                                    div:last-child {
-                                        padding: 4px 0;
-                                        width: 80%;
-                                        margin-left: 10%;
-                                    }
 
                                 }
-
-
                             }
                         }
 
@@ -208,9 +215,22 @@
                 width: 100%;
                 display: flex;
                 justify-content: center;
+                max-height: 95vh;
+
+
 
                 &__seances {
                     flex-basis: 80%;
+                    overflow-y: scroll;
+
+                    &::-webkit-scrollbar {
+                        width: 7px;
+                    }
+
+                    &::-webkit-scrollbar-thumb {
+                        background-color: #ffa079;
+                        border-radius: 10px;
+                    }
 
                     &__title {
 
@@ -220,7 +240,7 @@
                         border-bottom: 1px solid black;
 
                         h3 {
-                            flex-basis: 12%;
+                            flex-basis: 15%;
                             text-align: center;
                         }
                     }
@@ -237,10 +257,12 @@
                                 justify-content: space-between;
                                 align-items: center;
                                 padding: 0 5em;
+                                border-bottom: 1px solid black;
 
                                 p {
-                                    flex-basis: 12%;
+                                    flex-basis: 15%;
                                     text-align: center;
+                                    padding: 15px;
                                 }
 
                                 img {
@@ -256,11 +278,11 @@
                 &__total {
                     flex-basis: 10%;
                     background-color: var(--primary-color);
-                    margin: 20px 0px 10px 0px;
+                    margin: 2% 0px 3% 20px;
                     text-align: center;
                     border-radius: 10px;
-                    padding: 0 10px;
-                    // max-height: 65%;
+                    padding: 1% 10px;
+                    max-height: 50vh;
 
                     h3 {
                         font-size: 1.9em;
@@ -272,8 +294,20 @@
                         font-weight: 500;
                         font-size: 1.5em;
 
+                    }
+
+                    &__win {
                         &__euro {
                             color: white;
+                            font-size: 1.4em;
+                        }
+                    }
+
+                    &__wait {
+                        color: rgb(255, 0, 0);
+
+                        &__euro {
+                            color: rgb(255, 0, 0);
                             font-size: 1.4em;
                         }
                     }
@@ -285,169 +319,314 @@
     }
 }
 
-@media (max-width:900px) {
-    
-.dashboard {
-    
-    &__clients{
-    }
-    &__title {
-        
-    }
+@media (max-width:980px) {
 
-    &__planner {
-       
-        &__months {
-            &__title {
-            
+    .dashboard {
 
-                &__cta {
-                    
-                }
+        &__planner {
+            margin: 10px;
 
-                div {
-                    button {
-                        
+            &__months {
+                &__title {
+                    &__cta {
+                        padding: 10px;
                     }
                 }
-            }
 
-            &__month {
-                
-                justify-content: center;
+                &__month {
 
-                button {
-                   
-                }
+                    justify-content: center;
+                    flex-direction: column;
 
-                &__days {
-                    width: 74%;
-                    span {
-                       
+                    &__previous {
+                        position: sticky;
+                        top: 27%;
+                        right: 84%;
+
                     }
 
-                    &__day {
-                        height: 8vh;
+                    &__next {
+                        position: sticky;
+                        left: 84%;
+                        bottom: 70%;
+                    }
 
-                        &__all-sessions {
 
-                            &__session {
-                               
-                                &__name {
-                                    
+                    &__days {
+                        width: 74%;
 
-                                    img {
-                                    
+                        span {
+
+                            margin-left: 40%;
+                            margin-top: 2%;
+                        }
+
+                        &__day {
+                            height: 7vh;
+                            padding-top: 0;
+                            padding-bottom: 6%;
+                            display: flex;
+                            gap: 20px;
+                            overflow-y: hidden;
+
+
+                            &__all {
+                                display: flex;
+                                overflow-x: scroll;
+                                height: 28vh;
+
+                                &__sessions {
+
+                                    &__session {
+
+                                        // width: 20%;
+                                        &__name {
+
+
+                                            img {}
+
+                                        }
+
+                                        &__infos {
+                                            min-width: 63px;
+
+                                            &__user-hour {
+                                                flex-direction: column;
+
+                                                div:first-child {}
+
+                                                div {}
+
+                                                div:last-child {}
+                                            }
+                                        }
+
 
                                     }
-
                                 }
-
-                                &__infos {
-                                    
-
-                                    div:first-child {
-                                        
-                                    }
-
-                                    div {
-                                    }
-
-                                    div:last-child {
-
-                                    }
-
-                                }
-
-
                             }
+
                         }
 
                     }
 
+
                 }
-
-
-            }
-        }
-    }
-
-    &__paiements {
-        
-
-        &__header {
-            
-            &__title {
-            }
-
-            &__date {
-              
-            }
-
-            img {
             }
         }
 
+        &__paiements {
 
-        &__content {
-            
-            button {
-               
 
+            &__header {
+
+                &__title {}
+
+                &__date {}
+
+                img {}
             }
 
-            &__liste {
-                
-                &__seances {
 
-                    &__title {
+            &__content {
 
-                      
+                button {}
+
+                &__liste {
+                    flex-direction: column-reverse;
+
+                    &__seances {
+
+                        &__title {
+
+
+
+                            h3 {}
+                        }
+
+                        &__details {
+                            hr {}
+
+                            &__seance {
+                                &__content {
+
+
+                                    p {}
+
+                                    img {}
+                                }
+                            }
+                        }
+                    }
+
+                    &__total {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-around;
+                        margin: 0;
+
+
 
                         h3 {
-                            
+                            font-size: 1.2em;
+                        }
+
+                        &__win,
+                        &__wait {
+                            font-size: 1.1em;
+
+                            &__euro {}
                         }
                     }
 
-                    &__details {
-                        hr {
-                           
-                        }
 
-                        &__seance {
-                            &__content {
-                                
 
-                                p {
-                                }
-
-                                img {
-                                    
-                                }
-                            }
-                        }
-                    }
                 }
-
-                &__total {
-                    
-
-                    h3 {
-    
-                    }
-
-                    &__win,
-                    &__wait {
-                       
-                        &__euro {
-                            
-                        }
-                    }
-                }
-
-
             }
         }
     }
 }
+
+@media (max-width:500px) {
+
+    .dashboard {
+
+        &__clients {}
+
+        &__title {}
+
+        &__planner {
+
+            &__months {
+                &__title {
+
+
+                    &__cta {
+                        padding: 8px 1.4px;
+                        font-size: 0.7em;
+
+                    }
+
+                    div {
+                        font-size: 0.8em;
+
+                        button {
+                            font-size: 0.8em;
+                        }
+                    }
+                }
+
+                &__month {
+
+
+                    &__previous {}
+
+                    &__next {}
+
+
+                    &__days {
+
+                        span {
+                            margin-left: 30%;
+                        }
+
+                        &__day {
+                            height: 13vh;
+
+                            &__all {
+
+                                &__sessions {
+
+                                    &__session {
+
+                                        &__name {
+
+
+                                            img {}
+
+                                        }
+
+                                        &__infos {
+
+                                            div:first-child {}
+
+                                            div {}
+
+                                            div:last-child {}
+
+                                        }
+
+
+                                    }
+                                }
+                            }
+
+                        }
+
+                    }
+
+
+                }
+            }
+        }
+
+        &__paiements {
+            padding: 10px;
+
+
+            &__header {
+
+                &__title {}
+
+                &__date {}
+
+                img {}
+            }
+
+
+            &__content {
+
+                button {}
+
+                &__liste {
+                    flex-direction: column-reverse;
+                    padding: 0;
+
+                    &__seances {
+                        // display: flex;
+
+                        &__title {
+                            // display: flex;
+                            // flex-direction: column;
+                            padding: 0;
+
+
+
+                            h3 {}
+                        }
+
+                        &__details {
+                            hr {}
+
+                            &__seance {
+                                &__content {
+
+                                    padding: 0;
+
+                                    p {
+                                        font-size: 0.8em;
+                                    }
+
+                                    img {}
+                                }
+                            }
+                        }
+                    }
+
+
+
+                }
+            }
+        }
+    }
 }

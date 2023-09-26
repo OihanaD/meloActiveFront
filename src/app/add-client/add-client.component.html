@@ -1,5 +1,6 @@
 <div class="content form-client">
     <div class="form-client__content">
+        <img src="../../assets/close.png" alt="close" (click)='cancel()'>
         <h2>Ajout d'une séance</h2>
         <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="form-client__content__form">
             <div class="form-client__content__form__client-activity">
@@ -33,7 +34,7 @@
             <div class="form-client__content__form__action">
                 <button type="button" (click)='cancel()' class="form-client__content__form__action__cancel">Annuler</button>
 
-                <button type="submit" [disabled]="!profileForm.valid" class="form-client__content__form__action__submit">Submit</button>
+                <button type="submit" [disabled]="!profileForm.valid" class="form-client__content__form__action__submit">Enregistrer</button>
                 <div *ngIf="successMessage">
                     <p>{{ message }}</p>
                 </div>

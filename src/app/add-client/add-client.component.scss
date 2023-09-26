@@ -6,6 +6,12 @@
     &__content {
         padding: 14%;
         border: 53px solid #ffa079;
+        img{
+            position: relative;
+            left: 68vw;
+            bottom: 42vh;
+            cursor: pointer;
+        }
 
         h2 {
             text-align: center;

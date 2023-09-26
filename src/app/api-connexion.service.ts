@@ -10,7 +10,7 @@ import { ItotalPayed } from './Interfaces/itotal-payed';
 import { Icoach } from './Interfaces/icoach';
 import { IdataClient } from './Interfaces/idata-client';
 import { Iclientslist } from './Interfaces/iclientslist';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+// import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AddClientComponent } from './add-client/add-client.component';
 
 @Injectable({
@@ -18,8 +18,7 @@ import { AddClientComponent } from './add-client/add-client.component';
 })
 export class ApiConnexionService {
 
-  constructor(private http: HttpClient,private dialog: MatDialog
-    ) { }
+  constructor(private http: HttpClient) { }
   private url = 'http://127.0.0.1:8000';
   private urlClients = "/api/clients";
   private urlClient = "/api/client/details";
@@ -65,15 +64,12 @@ export class ApiConnexionService {
     return this.http.get<Icoach[]>(this.url + this.urlCoach,this.httpOptions)
   }
   getSessionsPerDate(year:number, month:number, firstday:number):Observable<IInformations[]>{
-    console.log(month)
     return this.http.get<IInformations[]>(`${this.url}${this.urlInformations}/${year}/${month}/${firstday}`, this.httpOptions)
   }
   getPayments():Observable<Ipayment[]>{
     return this.http.get<Ipayment[]>(this.url + this.urlpayments, this.httpOptions)
   }
-  getPaymentsPerMonthPayed(month:string|number, year:number):Observable<ItotalPayed[]>{
-    console.log(localStorage.getItem('access_token'));
-    
+  getPaymentsPerMonthPayed(month:string|number, year:number):Observable<ItotalPayed[]>{    
     return this.http.get<ItotalPayed[]>(`${this.url}${this.urlpaymentsTotal}/${month}/${year}`,this.httpOptions)
   }
   getPaymentsWaiting():Observable<number>{ 

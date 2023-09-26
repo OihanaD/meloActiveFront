@@ -1,5 +1,4 @@
 <div class="content dashboard">
-  <div (click)="goToClients()" class="dashboard__clients"><img src="../../assets/Group 127.png" alt="les clients"></div>
   <h1 class="dashboard__title">Mélo-Active</h1>
   <div class="dashboard__planner">
     <div class="dashboard__planner__months">
@@ -10,34 +9,34 @@
             {{currentMonth }} {{currentYear}}
           <button (click)="goToNextMonth()">></button>
         </div>
-        <button class="dashboard__planner__months__title__cta">Recherche</button>
+        <button class="dashboard__planner__months__title__cta">Nouveau client</button>
       </div>
     </div>
     <div class="dashboard__planner__months__month">
-      <button (click)="goToPreviousWeek()">
+      <button (click)="goToPreviousWeek()" class="dashboard__planner__months__month__previous">
         < </button>
           <div class="dashboard__planner__months__month__days" *ngFor="let day of daysOfMonth; let i = index">
             <span>{{ getDayOfWeek(i) }} {{ day }}</span>
             <div class="dashboard__planner__months__month__days__day">
-              
+              <div class="dashboard__planner__months__month__days__day__all" >
               <div *ngFor="let infos of informations"
-                class="dashboard__planner__months__month__days__day__all-sessions">
+                class="dashboard__planner__months__month__days__day__all__sessions">
                 <div *ngIf="day == infos.day"
-                  class="dashboard__planner__months__month__days__day__all-sessions__session" (click)="goToDetailsClient(infos.user_id)">
-                  <div class="dashboard__planner__months__month__days__day__all-sessions__session__name">
-                    <img src="{{infos.user_image}}" alt="user photo">
-                  </div>
-                  <div class="dashboard__planner__months__month__days__day__all-sessions__session__infos">
-                    <div>{{infos.time}}</div>
-                    <div>{{infos.name}}</div>
+                  class="dashboard__planner__months__month__days__day__all__sessions__session" (click)="goToDetailsClient(infos.user_id)">
+                  <div class="dashboard__planner__months__month__days__day__all__sessions__session__infos">
+                    <div class="dashboard__planner__months__month__days__day__all__sessions__session__infos__user-hour">
+                      <div>{{infos.time}}</div>
+                      <div>{{infos.name}}</div>
+                    </div>
                     <div [ngStyle]="infos.activity_session === 'Sport' ? {'background-color': '#ECF5FF', 'color': '#3993FC'} : (infos.activity_session === 'Nutrition' ? {'background-color': '#FFFCE1', 'color':'#E1CC00'} : {'background-color': 'grey'})">{{infos.activity_session}}</div>                 
                   </div>
                 </div>
               </div>
+            </div>
 
             </div>
           </div>
-          <button (click)="goToNextWeek()">></button>
+          <button (click)="goToNextWeek()" class="dashboard__planner__months__month__next">></button>
 
     </div>
 
@@ -57,32 +56,32 @@
             <h3>Activité</h3>
             <h3>Dernière séance</h3>
             <h3>Prix</h3>
-            <h3>Payé</h3>
+            <!-- <h3>Payé</h3> -->
             <div></div>
           </div>
-          <div class="dashboard__paiements__content__liste__seances__details" *ngFor="let payment of payments; let i= index">
+          <div class="dashboard__paiements__content__liste__seances__details" *ngFor="let payment of payments;">
             <div *ngIf="(getMonthLetter(payment.date_session) + '-' + getYear(payment.date_session)) === (currentMonth + '-' + currentYear)"  class="dashboard__paiements__content__liste__details__seance">
-              <div class="dashboard__paiements__content__liste__seances__details__seance__content" [ngStyle]="i
-              %2? {'background-color': 'transparent'} : {'background-color': 'rgb(217 217 217 / 23%)'}">
+              <div class="dashboard__paiements__content__liste__seances__details__seance__content" [ngStyle]="payment.is_paid? {'background-color': 'rgb(81 255 0 / 7%)'} : {'background-color': 'rgb(255 0 0 / 9%)'}">
                 <p>{{payment.user_name}}</p>
                 <p>{{payment.activity_session}}</p>
                 <p>{{ formatDateTime(payment.date_session) }}</p>
                 <p>{{payment.price}}</p>
-                <p>{{payment.is_paid ? 'V' : 'X'}}</p>
-                <img src="../../assets/Pen.png" alt="">
+                <img src="../../assets/Pen.png" alt="Modification paiements">
               </div>
-              <hr>
             </div>
 
           </div>
         </div>
         <div *ngFor="let seancePayed of totalPayed" class="dashboard__paiements__content__liste__total">
           <h3>Total/mois</h3>
-          <p class="dashboard__paiements__content__liste__total__win">Reçu</p>
-          <p class="dashboard__paiements__content__liste__total__win__euro">{{ seancePayed.total_paid_amount !== null ? seancePayed.total_paid_amount : 0 }} €</p>
-          <p class="dashboard__paiements__content__liste__total__wait">En attente</p>
-          <p class="dashboard__paiements__content__liste__total__wait__euro">{{ totalWait }} €</p>
-
+          <div>
+            <p class="dashboard__paiements__content__liste__total__win">Reçu</p>
+            <p class="dashboard__paiements__content__liste__total__win__euro">{{ seancePayed.total_paid_amount !== null ? seancePayed.total_paid_amount : 0 }} €</p>
+          </div>
+          <div>
+            <p class="dashboard__paiements__content__liste__total__wait">Impayé</p>
+            <p class="dashboard__paiements__content__liste__total__wait__euro">{{ totalWait }} €</p>
+          </div>
         </div>
        
         
