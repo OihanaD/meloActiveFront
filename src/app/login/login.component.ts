@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
  
   signinForm: FormGroup;
+  errorMessage: string = '';
   constructor(
     public fb: FormBuilder,
     public authService: AuthService,
@@ -21,10 +22,12 @@ export class LoginComponent {
       password: [''],
     });
   }
-  ngOnInit() {}
+  ngOnInit() {
+    this.authService.errorMessage$.subscribe((message) => {
+      this.errorMessage = message;
+    });
+  }
   loginUser() {
-    console.log(this.signinForm.value);
-    
     this.authService.signIn(this.signinForm.value);
   }
   

@@ -6,13 +6,13 @@
             <div class="form-client__content__form__client-activity">
                 <div class="form-client__content__form__client-activity__client">
                     <label for="clientId">Client: </label>
-                    <select id="clientId" formControlName="clientId" [(ngModel)]="selectedClientName">
+                    <select id="clientId" formControlName="clientId" [(ngModel)]="selectedClientName" required>
                         <option *ngFor="let clientName of clientsName" [value]="clientName">{{ clientName }}</option>
                     </select>
                 </div>
                 <div class="form-client__content__form__client-activity__activity">
                     <label for="activity">Activity: </label>
-                    <select id="activity" formControlName="activity" [(ngModel)]="selectedActivity">
+                    <select id="activity" formControlName="activity" [(ngModel)]="selectedActivity" required>
                         <option *ngFor="let activity of activities" [value]="activity">{{ activity }}</option>
                     </select>
                 </div>
@@ -20,11 +20,11 @@
             <div class="form-client__content__form__date-price">
                 <div class="form-client__content__form__date-price__date">
                     <label for="date">Date: </label>
-                    <input id="date" type="datetime-local" formControlName="date">
+                    <input id="date" type="datetime-local" formControlName="date" required>
                 </div>
                 <div class="form-client__content__form__date-price__price">
                     <label for="Price">Prix: </label>
-                    <input id="Price" type="number" formControlName="price">
+                    <input id="Price" type="number" formControlName="price" required>
                 </div>
             </div>
             <div class="form-client__content__form__objectif">
@@ -33,11 +33,12 @@
             </div>
             <div class="form-client__content__form__action">
                 <button type="button" (click)='cancel()' class="form-client__content__form__action__cancel">Annuler</button>
-
-                <button type="submit" [disabled]="!profileForm.valid" class="form-client__content__form__action__submit">Enregistrer</button>
-                <div *ngIf="successMessage">
+                <div *ngIf="havingMessage">
                     <p>{{ message }}</p>
                 </div>
+                <input type="checkbox" name="contact_me" value="1" style="display:none !important" tabindex="-1" autocomplete="off">
+                <button type="submit" [disabled]="!profileForm.valid" class="form-client__content__form__action__submit">Enregistrer</button>
+               
             </div>
         </form>
     </div>

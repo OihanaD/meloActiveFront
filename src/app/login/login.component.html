@@ -3,8 +3,9 @@
     <form [formGroup]="signinForm" (ngSubmit)="loginUser()" class="form-login__content__form">
       <h2 class="form-login__content__form__title">Connexion</h2>
       <div class="form-login__content__form__email">
-        <label>Email</label>
+        <label for="email">Email</label>
         <input
+          id="email"
           type="email"
           class="form-login__content__form__email__input"
           formControlName="email"
@@ -12,8 +13,9 @@
         />
       </div>
       <div class="form-login__content__form__password">
-        <label>Password</label>
+        <label for="password">Password</label>
         <input
+          id="password"
           type="password"
           class="form-login__content__form__password__input"
           formControlName="password"
@@ -21,7 +23,10 @@
           />
       </div>
       <div class="form-login__content__form__submit">
-        <button type="submit" class="form-login__content__form__submit__button">Connexion</button>
+        <button [disabled]="!signinForm.valid" type="submit" class="form-login__content__form__submit__button">Connexion</button>
+      </div>
+      <div *ngIf="errorMessage" class="form-login__content__form__error">
+        {{ errorMessage }}
       </div>
     </form>
   </div>

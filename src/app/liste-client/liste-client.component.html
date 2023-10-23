@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="clients__list__content__card__infos">
-                <p> {{client.email}}</p>
+                <p><a href="mailto:  {{client.email}}"> {{client.email}}</a></p>
                 <p *ngIf="client.phone != null"> {{client.phone}}</p>
             </div>
             <div *ngIf="client.last_session_date" class="clients__list__content__card__last-seance">Dernière séance le :

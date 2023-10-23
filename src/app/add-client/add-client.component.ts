@@ -17,7 +17,7 @@ export class AddClientComponent implements OnInit {
   clientsName = [];
   selectedClientName?: string;
   selectedActivity?: string;
-  successMessage?: boolean;
+  havingMessage?: boolean;
   activities?: any;
 
   constructor(private service: ApiConnexionService, private router: Router,
@@ -72,6 +72,13 @@ export class AddClientComponent implements OnInit {
 
 
   onSubmit() {
+    const contactMeValue = (document.querySelector('input[name="contact_me"]') as HTMLInputElement).value;
+    
+    if (contactMeValue === '1') {
+      this.havingMessage = true;
+     this.message = 'Impossible de traiter votre demande';
+     return;
+    } 
     //Je récupère le nom du client
     const clientName = this.selectedClientName;
     //Je recherche le client dans ma liste de client
@@ -93,7 +100,7 @@ export class AddClientComponent implements OnInit {
 
     //Je l'envoie en post dans mon api
     this.service.addSession(this.profileForm.value);
-    this.successMessage = true;
+    this.havingMessage = true;
     this.message = 'Séance ajoutée avec succès';
     setTimeout(() => {
       this.router.navigate(['/home']);

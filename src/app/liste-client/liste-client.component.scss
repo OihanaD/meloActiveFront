@@ -69,12 +69,6 @@
                 align-items: center;
                 gap: 12%;
 
-                &__picture {
-                    width: 7em;
-                    height: 7em;
-                    border-radius: 50%;
-                }
-
                 &__stickers {
                     display: flex;
                     padding-left: 27%;
@@ -93,6 +87,14 @@
                 &__infos,
                 &__last-seance {
                     text-align: center;
+
+                    p{
+                        a{
+                            text-decoration: none;
+                            color: #FFA079;
+                            cursor: pointer;
+                        }
+                    }
                 }
             }
         }

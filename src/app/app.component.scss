@@ -4,7 +4,7 @@
     justify-content: flex-start;
     align-items: center;
     background-color: var(--primary-color);
-    color: white;
+    color: var(--color-texte);
     padding: 10px 20px;
     position: sticky;
     top: 0.3px;
@@ -27,7 +27,7 @@
 
 .nav-links a {
     text-decoration: none;
-    color: white;
+    color: var(--color-texte);
 }
 @media (max-width:950px) {
     

@@ -40,6 +40,7 @@
                         box-shadow: 0px 1px 2px 0px #FFA079;
                         border: 1px solid #00000021;
                         padding: 10px;
+                        width: 100%;
                     }
 
                 }
@@ -71,13 +72,15 @@
                     background: #F88;
                     border: none;
                     padding: 5px 40px;
+                    cursor: pointer;
                 }
 
                 &__submit {
                     border-radius: 5px;
                     border: none;
-                    padding: 5px 40px;
+                    padding: 20px;
                     background-color: #FFA079;
+                    cursor: pointer;
                 }
             }
         }

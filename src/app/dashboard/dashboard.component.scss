@@ -34,7 +34,7 @@
                     padding: 3px 50px;
                     border: none;
                     cursor: pointer;
-                    color: white;
+                    color: var(--color-texte);
                 }
 
                 div {
@@ -286,7 +286,7 @@
 
                     h3 {
                         font-size: 1.9em;
-                        color: #FFF;
+                        color: var(--color-texte);
                     }
 
                     &__win,
@@ -298,7 +298,7 @@
 
                     &__win {
                         &__euro {
-                            color: white;
+                            color: var(--color-texte);
                             font-size: 1.4em;
                         }
                     }
@@ -416,7 +416,7 @@
         }
 
         &__paiements {
-
+            margin: 9px;
 
             &__header {
 
@@ -464,6 +464,8 @@
                         align-items: center;
                         justify-content: space-around;
                         margin: 0;
+                        gap: 20px;
+                        min-width: 15em;
 
 
 
@@ -508,7 +510,7 @@
                     }
 
                     div {
-                        font-size: 0.8em;
+                        font-size: 0.7em;
 
                         button {
                             font-size: 0.8em;
@@ -527,7 +529,7 @@
                     &__days {
 
                         span {
-                            margin-left: 30%;
+                            margin-left: 22%;
                         }
 
                         &__day {
@@ -575,19 +577,22 @@
 
 
             &__header {
+                gap: 5px;
 
-                &__title {}
+                &__title {
+                    font-size: 1.4rem;
+                }
 
-                &__date {}
+                &__date {
+                    font-size: 1rem;
+                }
 
                 img {}
             }
 
 
             &__content {
-
-                button {}
-
+                max-width: 289px;
                 &__liste {
                     flex-direction: column-reverse;
                     padding: 0;
@@ -596,13 +601,13 @@
                         // display: flex;
 
                         &__title {
-                            // display: flex;
-                            // flex-direction: column;
-                            padding: 0;
+                            padding: 0.3em;
 
 
 
-                            h3 {}
+                            h3 {
+                                font-size: 0.9rem;
+                            }
                         }
 
                         &__details {
@@ -615,6 +620,7 @@
 
                                     p {
                                         font-size: 0.8em;
+                                        padding: 6px;
                                     }
 
                                     img {}
@@ -626,6 +632,10 @@
 
 
                 }
+                button{
+                  height: 32px;
+                }
+
             }
         }
     }

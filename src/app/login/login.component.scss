@@ -7,7 +7,7 @@
     top: 0;
     &__content {
         padding: 14%;
-        border: 53px solid #ffa079;
+        border: 53px solid var(--primary-color);
 
         &__form {
             display: flex;
@@ -38,6 +38,7 @@
                     background: var(--primary-color);
                     border: none;
                     padding: 5px;
+                    cursor: pointer;
                 }
             }
         }

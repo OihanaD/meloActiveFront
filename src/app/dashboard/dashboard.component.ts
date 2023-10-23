@@ -78,6 +78,8 @@ export class DashboardComponent implements OnInit {
       )
       .subscribe((all: IInformations[]) => {        
         this.informations = all;
+        console.log(all);
+        
       });
     
   };

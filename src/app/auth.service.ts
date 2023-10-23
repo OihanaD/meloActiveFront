@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 
@@ -11,13 +11,12 @@ import { catchError, map } from 'rxjs/operators';
 })
 export class AuthService {
 
-  // isLoggedIn:boolean = false;
-  redirecturl?:string;
+  redirecturl?:string;  
+  endpoint: string = 'http://127.0.0.1:8000/api';
+  headers = new HttpHeaders().set('Content-Type', 'application/json');
+  private errorMessageSubject = new BehaviorSubject<string>(''); // BehaviorSubject pour le message d'erreur
+  errorMessage$ = this.errorMessageSubject.asObservable();
 
-  
-    endpoint: string = 'http://127.0.0.1:8000/api';
-    headers = new HttpHeaders().set('Content-Type', 'application/json');
-    currentUser = {};
     constructor(private http: HttpClient, public router: Router) {}
     // Sign-up
     signUp(user: any): Observable<any> {
@@ -29,21 +28,21 @@ export class AuthService {
 
  
     signIn(user: any) {
-      console.log('iciok');
-      // console.log(user);
-      
-      this.http
-        .post<any>('http://127.0.0.1:8000/api/login', user)
-        .subscribe((res: any) => {
+      this.errorMessageSubject.next('');
+      this.http.post<any>(this.endpoint + '/login', user).subscribe(
+        (res: any) => {
+         
           localStorage.setItem('access_token', res.token);
-          // console.log(res.token);
-          
-          
-          // this.getUserProfile(res._id).subscribe((res) => {
-          //   this.currentUser = res;
-            this.router.navigate(['home/']);
-          // });
-        });
+          this.router.navigate(['home']);
+        },
+        (error) => {
+          if (error.status === 401) {
+            this.errorMessageSubject.next('Votre email ou votre mot de passe est incorrect'); // Émet le message d'erreur
+          } else {
+            this.errorMessageSubject.next('Une erreur s\'est produite lors de la connexion.');
+          }
+        }
+      );
     }
     getToken() {
       return localStorage.getItem('access_token');
