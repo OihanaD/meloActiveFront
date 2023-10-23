@@ -2,7 +2,7 @@
     <div class="form-client__content">
         <img src="../../assets/close.png" alt="close" (click)='cancel()'>
         <h2>Ajout d'une séance</h2>
-        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="form-client__content__form">
+        <form [formGroup]="SeanceForm" (ngSubmit)="onSubmit()" class="form-client__content__form">
             <div class="form-client__content__form__client-activity">
                 <div class="form-client__content__form__client-activity__client">
                     <label for="clientId">Client: </label>
@@ -31,13 +31,14 @@
                 <label for="objectif">Objectif: </label>
                 <textarea id="objectif" type="text" formControlName="objectif"></textarea>
             </div>
+            <input type="text" name="a_password" style="display:none !important" tabindex="-1" autocomplete="off">
+
             <div class="form-client__content__form__action">
                 <button type="button" (click)='cancel()' class="form-client__content__form__action__cancel">Annuler</button>
                 <div *ngIf="havingMessage">
                     <p>{{ message }}</p>
                 </div>
-                <input type="checkbox" name="contact_me" value="1" style="display:none !important" tabindex="-1" autocomplete="off">
-                <button type="submit" [disabled]="!profileForm.valid" class="form-client__content__form__action__submit">Enregistrer</button>
+                <button type="submit" [disabled]="!SeanceForm.valid" class="form-client__content__form__action__submit">Enregistrer</button>
                
             </div>
         </form>

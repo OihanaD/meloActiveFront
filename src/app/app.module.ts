@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { DetailClientComponent } from './detail-client/detail-client.component';
 import { ListeClientComponent } from './liste-client/liste-client.component';
-import { AddClientComponent } from './add-client/add-client.component';
+import { AddSeanceComponent } from './add-seance/add-seance.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,7 +19,7 @@ import { LoginComponent } from './login/login.component';
     AppComponent,
     DetailClientComponent,
     ListeClientComponent,
-    AddClientComponent,
+    AddSeanceComponent,
     LoginComponent,
   ],
   imports: [

@@ -9,7 +9,7 @@ import { Ipayment } from '../Interfaces/ipayment';
 import { ItotalPayed } from '../Interfaces/itotal-payed';
 import { Router } from '@angular/router';
 import { MatDialogConfig } from '@angular/material/dialog';
-import { AddClientComponent } from '../add-client/add-client.component';
+import { AddSeanceComponent } from '../add-seance/add-seance.component';
 
 
 
@@ -56,7 +56,7 @@ export class DashboardComponent implements OnInit {
 
   openForm(){
 
-  this.router.navigate(['client/add']);
+  this.router.navigate(['seance/add']);
   }
   
   goToDetailsClient(clientId : number){

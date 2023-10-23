@@ -6,11 +6,11 @@ import { catchError, of } from 'rxjs';
 import { Iclientslist } from '../Interfaces/iclientslist';
 
 @Component({
-  selector: 'app-add-client',
-  templateUrl: './add-client.component.html',
-  styleUrls: ['./add-client.component.scss']
+  selector: 'app-add-seance',
+  templateUrl: './add-seance.component.html',
+  styleUrls: ['./add-seance.component.scss']
 })
-export class AddClientComponent implements OnInit {
+export class AddSeanceComponent implements OnInit {
   clients: any;
   clientId?: number|string;
   message?: string;
@@ -26,7 +26,7 @@ export class AddClientComponent implements OnInit {
   ngOnInit(): void {
     this.getAllClientsInfos();
   }
-  profileForm = new FormGroup({
+  SeanceForm = new FormGroup({
     clientId: new FormControl(''),
     activity: new FormControl(''),
     objectif: new FormControl(''),
@@ -72,12 +72,12 @@ export class AddClientComponent implements OnInit {
 
 
   onSubmit() {
-    const contactMeValue = (document.querySelector('input[name="contact_me"]') as HTMLInputElement).value;
+    const aPasswordField = document.querySelector('input[name="a_password"]') as HTMLInputElement;
     
-    if (contactMeValue === '1') {
+    if (aPasswordField.value) {
       this.havingMessage = true;
-     this.message = 'Impossible de traiter votre demande';
-     return;
+      this.message = 'Impossible de traiter votre demande';
+      return;
     } 
     //Je récupère le nom du client
     const clientName = this.selectedClientName;
@@ -96,10 +96,10 @@ export class AddClientComponent implements OnInit {
       this.clientId = foundClient.id;
     }
     //Je reemt ma valeur en string dans mon retour de formulaire
-    this.profileForm.value.clientId = this.clientId?.toString();
+    this.SeanceForm.value.clientId = this.clientId?.toString();
 
     //Je l'envoie en post dans mon api
-    this.service.addSession(this.profileForm.value);
+    this.service.addSession(this.SeanceForm.value);
     this.havingMessage = true;
     this.message = 'Séance ajoutée avec succès';
     setTimeout(() => {
@@ -108,7 +108,7 @@ export class AddClientComponent implements OnInit {
   }
 
   cancel(){
-    this.profileForm.reset();
+    this.SeanceForm.reset();
     this.router.navigate(['/home']);
   }
 }

@@ -11,7 +11,7 @@ import { Icoach } from './Interfaces/icoach';
 import { IdataClient } from './Interfaces/idata-client';
 import { Iclientslist } from './Interfaces/iclientslist';
 // import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { AddClientComponent } from './add-client/add-client.component';
+import { AddSeanceComponent } from './add-seance/add-seance.component';
 
 @Injectable({
   providedIn: 'root'
